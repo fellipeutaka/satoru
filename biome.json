@@ -1,0 +1,48 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git"
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "all": true
+    }
+  },
+  "files": {
+    "ignore": ["./src/routeTree.gen.ts"]
+  },
+  "overrides": [
+    {
+      "include": ["./*.config.ts", "./*.config.js"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noDefaultExport": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["./tailwind.config.ts", "./src/components/icons.tsx"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useNamingConvention": "off"
+          }
+        }
+      }
+    }
+  ],
+  "javascript": {
+    "globals": ["React"]
+  }
+}
