@@ -1,6 +1,6 @@
 # Satoru
 
-Build your future gaming PC with Satoru.
+Build your minecraft server with mods or not it's up to you buddy!
 
 ## Recommended IDE Setup
 
