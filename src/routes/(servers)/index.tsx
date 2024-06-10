@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ServerList } from "~/components/servers/server-list";
 import { Separator } from "~/components/ui/separator";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/(servers)/")({
   component: Component,
 });
 

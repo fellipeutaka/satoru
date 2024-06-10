@@ -13,20 +13,22 @@ import { createFileRoute } from "@tanstack/react-router";
 // Import Routes
 
 import { Route as rootRoute } from "./routes/__root";
-import { Route as IndexImport } from "./routes/index";
+import { Route as serversIndexImport } from "./routes/(servers)/index";
 
 // Create Virtual Routes
 
-const SettingsLazyImport = createFileRoute("/settings")();
+const SettingsIndexLazyImport = createFileRoute("/settings/")();
 
 // Create/Update Routes
 
-const SettingsLazyRoute = SettingsLazyImport.update({
-  path: "/settings",
+const SettingsIndexLazyRoute = SettingsIndexLazyImport.update({
+  path: "/settings/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/settings.lazy").then((d) => d.Route));
+} as any).lazy(() =>
+  import("./routes/settings/index.lazy").then((d) => d.Route),
+);
 
-const IndexRoute = IndexImport.update({
+const serversIndexRoute = serversIndexImport.update({
   path: "/",
   getParentRoute: () => rootRoute,
 } as any);
@@ -35,18 +37,18 @@ const IndexRoute = IndexImport.update({
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    "/": {
+    "/(servers)/": {
       id: "/";
       path: "/";
       fullPath: "/";
-      preLoaderRoute: typeof IndexImport;
+      preLoaderRoute: typeof serversIndexImport;
       parentRoute: typeof rootRoute;
     };
-    "/settings": {
-      id: "/settings";
+    "/settings/": {
+      id: "/settings/";
       path: "/settings";
       fullPath: "/settings";
-      preLoaderRoute: typeof SettingsLazyImport;
+      preLoaderRoute: typeof SettingsIndexLazyImport;
       parentRoute: typeof rootRoute;
     };
   }
@@ -55,8 +57,8 @@ declare module "@tanstack/react-router" {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  IndexRoute,
-  SettingsLazyRoute,
+  serversIndexRoute,
+  SettingsIndexLazyRoute,
 });
 
 /* prettier-ignore-end */
@@ -68,14 +70,14 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/settings"
+        "/settings/"
       ]
     },
     "/": {
-      "filePath": "index.tsx"
+      "filePath": "(servers)/index.tsx"
     },
-    "/settings": {
-      "filePath": "settings.lazy.tsx"
+    "/settings/": {
+      "filePath": "settings/index.lazy.tsx"
     }
   }
 }

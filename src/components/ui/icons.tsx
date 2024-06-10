@@ -3,6 +3,79 @@ export type Icon = keyof typeof Icons;
 export type IconComponent = (props: IconProps) => React.ReactElement;
 
 export const Icons = {
+  X: (props) => (
+    <svg
+      role="img"
+      aria-label="X"
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M18 6L6 18M6 6l12 12" />
+    </svg>
+  ),
+  Search: (props) => (
+    <svg
+      role="img"
+      aria-label="Search"
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <circle cx={11} cy={11} r={8} />
+      <path d="M21 21l-4.3-4.3" />
+    </svg>
+  ),
+  Check: (props) => (
+    <svg
+      role="img"
+      aria-label="Check"
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M20 6L9 17l-5-5" />
+    </svg>
+  ),
+  ChevronDown: (props) => (
+    <svg
+      role="img"
+      aria-label="Chevron Down"
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  ),
   Server: (props) => (
     <svg
       role="img"

@@ -3,9 +3,9 @@ import { open } from "@tauri-apps/api/dialog";
 import { dataDir, desktopDir, join } from "@tauri-apps/api/path";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "../ui/button";
-import { Form } from "../ui/form";
-import { Input, InputStyles } from "../ui/input";
+import { Button } from "~/components/ui/button";
+import { Form } from "~/components/ui/form";
+import { Input, InputStyles } from "~/components/ui/input";
 
 const settingsFormSchema = z.object({
   minecraftFolder: z.string(),
@@ -32,6 +32,7 @@ export function SettingsForm() {
       return {
         minecraftFolder,
         serverFolder,
+        ngrokToken: "",
       };
     },
   });

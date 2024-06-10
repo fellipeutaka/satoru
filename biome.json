@@ -35,11 +35,7 @@
       }
     },
     {
-      "include": [
-        "./tailwind.config.ts",
-        "./src/components/icons.tsx",
-        "./src/components/ui/form.tsx"
-      ],
+      "include": ["./tailwind.config.ts", "./src/components/ui/**/*.tsx"],
       "linter": {
         "rules": {
           "style": {
