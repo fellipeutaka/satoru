@@ -2,10 +2,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { open } from "@tauri-apps/api/dialog";
 import { dataDir, desktopDir, join } from "@tauri-apps/api/path";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "~/components/ui/button";
 import { Form } from "~/components/ui/form";
 import { Input, InputStyles } from "~/components/ui/input";
+import { settingsStore } from "~/store/settings";
 
 const settingsFormSchema = z.object({
   minecraftFolder: z.string(),
@@ -19,6 +21,13 @@ export function SettingsForm() {
   const form = useForm<SettingsFormValues>({
     resolver: zodResolver(settingsFormSchema),
     defaultValues: async () => {
+      const data = settingsFormSchema.safeParse(
+        await settingsStore.get("settings"),
+      );
+      if (data.success) {
+        return data.data;
+      }
+
       const [dataDirPath, desktopPath] = await Promise.all([
         dataDir(),
         desktopDir(),
@@ -38,7 +47,9 @@ export function SettingsForm() {
   });
 
   const handleSubmit = form.handleSubmit(async (data) => {
-    console.log(data);
+    await settingsStore.set("settings", data);
+    form.reset(data, { keepValues: true });
+    toast.success("Settings updated successfully!");
   });
 
   return (
@@ -52,6 +63,7 @@ export function SettingsForm() {
               <Form.Label>Minecraft folder</Form.Label>
               <Form.Control>
                 <button
+                  type="button"
                   className={InputStyles({
                     className: "items-center",
                   })}
@@ -86,6 +98,7 @@ export function SettingsForm() {
               <Form.Label>Server folder</Form.Label>
               <Form.Control>
                 <button
+                  type="button"
                   className={InputStyles({
                     className: "items-center",
                   })}

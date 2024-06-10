@@ -26,6 +26,7 @@ fn get_java_version() -> Result<String, String> {
 
 fn main() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_store::Builder::default().build())
         .invoke_handler(tauri::generate_handler![get_java_version])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

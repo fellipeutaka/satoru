@@ -29,6 +29,9 @@ importers:
       '@tauri-apps/api':
         specifier: ^1.5.6
         version: 1.5.6
+      '@tauri-apps/plugin-store':
+        specifier: github:tauri-apps/tauri-plugin-store#v1
+        version: tauri-plugin-store-api@https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/51717bbde4101f44d3e2191907419f6f7085e2ef
       cmdk:
         specifier: ^1.0.0
         version: 1.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc-cc1ec60d0d-20240607(react@19.0.0-rc-cc1ec60d0d-20240607))(react@19.0.0-rc-cc1ec60d0d-20240607)
@@ -1518,6 +1521,10 @@ packages:
     resolution: {integrity: sha512-ZoyXOdJjISB7/BcLTR6SEsLgKtDStYyYZVLsUtWChO4Ps20CBad7lfJKVDiejocV4ME1hLmyY0WJE3hSDcmQ2A==}
     engines: {node: '>=14.0.0'}
     hasBin: true
+
+  tauri-plugin-store-api@https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/51717bbde4101f44d3e2191907419f6f7085e2ef:
+    resolution: {tarball: https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/51717bbde4101f44d3e2191907419f6f7085e2ef}
+    version: 0.0.0
 
   thenify-all@1.6.0:
     resolution: {integrity: sha512-RNxQH/qI8/t3thXJDwcstUO4zeqo64+Uy/+sNVRBx4Xn2OX+OZ9oP+iJnNFqplFra2ZUVeKCSa2oVWi3T4uVmA==}
@@ -3018,6 +3025,10 @@ snapshots:
       sucrase: 3.35.0
     transitivePeerDependencies:
       - ts-node
+
+  tauri-plugin-store-api@https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/51717bbde4101f44d3e2191907419f6f7085e2ef:
+    dependencies:
+      '@tauri-apps/api': 1.5.6
 
   thenify-all@1.6.0:
     dependencies:
