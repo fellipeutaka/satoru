@@ -1,19 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { open } from "@tauri-apps/api/dialog";
 import { dataDir, desktopDir, join } from "@tauri-apps/api/path";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "~/components/ui/button";
 import { Form } from "~/components/ui/form";
-import { InputStyles } from "~/components/ui/input";
 import { settingsStore } from "~/store/settings";
+import { SettingsFormFolderField } from "./settings-form-folder-field";
 import { SettingsNgrokField } from "./settings-ngrok-field";
 
 const settingsFormSchema = z.object({
   minecraftFolder: z.string(),
   serverFolder: z.string(),
-  ngrokToken: z.string().optional(),
+  ngrokToken: z.string().trim().min(1),
 });
 
 export type SettingsFormValues = z.infer<typeof settingsFormSchema>;
@@ -56,73 +55,18 @@ export function SettingsForm() {
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit} className="space-y-8">
-        <Form.Field
-          control={form.control}
+        <SettingsFormFolderField
           name="minecraftFolder"
-          render={({ field }) => (
-            <Form.Item>
-              <Form.Label>Minecraft folder</Form.Label>
-              <Form.Control>
-                <button
-                  type="button"
-                  className={InputStyles({
-                    className: "items-center",
-                  })}
-                  onClick={async () => {
-                    const path = await open({
-                      directory: true,
-                      defaultPath: field.value,
-                    });
-                    if (path) {
-                      field.onChange(path);
-                    }
-                  }}
-                  {...field}
-                >
-                  {field.value ||
-                    "C:/Users/your-username/AppData/Roaming/.minecraft"}
-                </button>
-              </Form.Control>
-              <Form.Description>
-                This is the folder where your Minecraft is installed.
-              </Form.Description>
-              <Form.Message />
-            </Form.Item>
-          )}
+          label="Minecraft folder"
+          placeholder="C:/Users/your-username/AppData/Roaming/.minecraft"
+          description="This is the folder where your Minecraft is installed."
         />
 
-        <Form.Field
-          control={form.control}
+        <SettingsFormFolderField
           name="serverFolder"
-          render={({ field }) => (
-            <Form.Item>
-              <Form.Label>Server folder</Form.Label>
-              <Form.Control>
-                <button
-                  type="button"
-                  className={InputStyles({
-                    className: "items-center",
-                  })}
-                  onClick={async () => {
-                    const path = await open({
-                      directory: true,
-                      defaultPath: field.value,
-                    });
-                    if (path) {
-                      field.onChange(path);
-                    }
-                  }}
-                  {...field}
-                >
-                  {field.value || "C:/Users/your-username/Desktop/servers"}
-                </button>
-              </Form.Control>
-              <Form.Description>
-                This is the folder where your servers are stored.
-              </Form.Description>
-              <Form.Message />
-            </Form.Item>
-          )}
+          label="Server folder"
+          placeholder="C:/Users/your-username/Desktop/servers"
+          description="This is the folder where your servers are stored."
         />
 
         <SettingsNgrokField />
