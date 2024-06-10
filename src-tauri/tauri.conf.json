@@ -15,6 +15,13 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "dialog": {
+        "all": false,
+        "open": true
+      },
+      "path": {
+        "all": true
       }
     },
     "windows": [

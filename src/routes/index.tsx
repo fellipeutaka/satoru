@@ -1,33 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { invoke } from "@tauri-apps/api";
-import { useActionState } from "react";
-import { Button } from "~/components/ui/button";
+import { ServerList } from "~/components/servers/server-list";
+import { Separator } from "~/components/ui/separator";
 
 export const Route = createFileRoute("/")({
   component: Component,
 });
 
-const invokeTauri = async () => {
-  try {
-    return await invoke<string>("get_java_version");
-  } catch {
-    return "Error getting Java version.";
-  }
-};
-
 function Component() {
-  const [response, handleInvoke, isPending] = useActionState(invokeTauri, null);
-
   return (
-    <div className="">
-      <h1>Welcome to Tauri!</h1>
-
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
-      <Button onClick={handleInvoke} disabled={isPending}>
-        Invoke
-      </Button>
-      <p>{isPending ? "Loading..." : response}</p>
-    </div>
+    <main className="space-y-6">
+      <header>
+        <h1 className="text-lg font-medium">Servers</h1>
+        <h2 className="text-sm text-muted-foreground">
+          This is the servers page. You can add servers here for your
+          application.
+        </h2>
+      </header>
+      <Separator />
+      <ServerList />
+    </main>
   );
 }
