@@ -1,8 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ServerList } from "~/components/servers/server-list";
+import { createLazyFileRoute } from "@tanstack/react-router";
 import { Separator } from "~/components/ui/separator";
 
-export const Route = createFileRoute("/(servers)/")({
+export const Route = createLazyFileRoute("/servers/$name")({
   component: Component,
 });
 
@@ -17,7 +16,7 @@ function Component() {
         </h2>
       </header>
       <Separator />
-      <ServerList />
+      <div>Hello /(servers)/$name!</div>
     </main>
   );
 }

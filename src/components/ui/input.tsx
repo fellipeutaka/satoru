@@ -12,9 +12,11 @@ export function Input({
 }: React.ComponentPropsWithRef<"input">) {
   return (
     <input
+      ref={ref}
       type={type}
       className={InputStyles({ className })}
-      ref={ref}
+      autoComplete="off"
+      autoCorrect="off"
       {...props}
     />
   );

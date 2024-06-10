@@ -1,4 +1,4 @@
-import { Link, useLocation } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import packageJson from "../../../package.json";
 import { ButtonStyles } from "../ui/button";
 import { type IconComponent, Icons } from "../ui/icons";
@@ -6,7 +6,7 @@ import { type IconComponent, Icons } from "../ui/icons";
 const navItems = [
   {
     title: "Servers",
-    href: "/",
+    href: "/servers",
     icon: Icons.Server,
   },
   {
@@ -21,8 +21,6 @@ const navItems = [
 }[];
 
 export function Sidebar() {
-  const { pathname } = useLocation();
-
   return (
     <aside className="border-r flex flex-col justify-between">
       <nav className="flex flex-col gap-2">
@@ -32,12 +30,8 @@ export function Sidebar() {
             to={item.href}
             className={ButtonStyles({
               variant: "ghost",
-              className: [
-                "justify-start",
-                pathname === item.href
-                  ? "bg-accent text-accent-foreground"
-                  : "hover:bg-accent/50 text-accent-foreground",
-              ],
+              className:
+                "justify-start [&.active]:bg-accent [&:not(.active)]:hover:bg-accent/50",
             })}
           >
             <item.icon className="size-4 mr-2" />

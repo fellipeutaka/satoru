@@ -13,13 +13,20 @@ import { createFileRoute } from "@tanstack/react-router";
 // Import Routes
 
 import { Route as rootRoute } from "./routes/__root";
-import { Route as serversIndexImport } from "./routes/(servers)/index";
+import { Route as IndexImport } from "./routes/index";
+import { Route as ServersIndexImport } from "./routes/servers/index";
 
 // Create Virtual Routes
 
 const SettingsIndexLazyImport = createFileRoute("/settings/")();
+const ServersNameLazyImport = createFileRoute("/servers/$name")();
 
 // Create/Update Routes
+
+const IndexRoute = IndexImport.update({
+  path: "/",
+  getParentRoute: () => rootRoute,
+} as any);
 
 const SettingsIndexLazyRoute = SettingsIndexLazyImport.update({
   path: "/settings/",
@@ -28,20 +35,41 @@ const SettingsIndexLazyRoute = SettingsIndexLazyImport.update({
   import("./routes/settings/index.lazy").then((d) => d.Route),
 );
 
-const serversIndexRoute = serversIndexImport.update({
-  path: "/",
+const ServersIndexRoute = ServersIndexImport.update({
+  path: "/servers/",
   getParentRoute: () => rootRoute,
 } as any);
+
+const ServersNameLazyRoute = ServersNameLazyImport.update({
+  path: "/servers/$name",
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import("./routes/servers/$name.lazy").then((d) => d.Route),
+);
 
 // Populate the FileRoutesByPath interface
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    "/(servers)/": {
+    "/": {
       id: "/";
       path: "/";
       fullPath: "/";
-      preLoaderRoute: typeof serversIndexImport;
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/servers/$name": {
+      id: "/servers/$name";
+      path: "/servers/$name";
+      fullPath: "/servers/$name";
+      preLoaderRoute: typeof ServersNameLazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/servers/": {
+      id: "/servers/";
+      path: "/servers";
+      fullPath: "/servers";
+      preLoaderRoute: typeof ServersIndexImport;
       parentRoute: typeof rootRoute;
     };
     "/settings/": {
@@ -57,7 +85,9 @@ declare module "@tanstack/react-router" {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  serversIndexRoute,
+  IndexRoute,
+  ServersNameLazyRoute,
+  ServersIndexRoute,
   SettingsIndexLazyRoute,
 });
 
@@ -70,11 +100,19 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/servers/$name",
+        "/servers/",
         "/settings/"
       ]
     },
     "/": {
-      "filePath": "(servers)/index.tsx"
+      "filePath": "index.tsx"
+    },
+    "/servers/$name": {
+      "filePath": "servers/$name.lazy.tsx"
+    },
+    "/servers/": {
+      "filePath": "servers/index.tsx"
     },
     "/settings/": {
       "filePath": "settings/index.lazy.tsx"

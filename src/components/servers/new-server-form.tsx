@@ -1,6 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import { cn } from "~/lib/utils";
 import { useMinecraftVersions } from "../hooks/use-minecraft-versions";
@@ -24,10 +26,31 @@ export function NewServerForm() {
   const form = useForm<NewServerFormValues>({
     resolver: zodResolver(newServerFormSchema),
   });
+  const router = useRouter();
   const [isVersionOpen, setIsVersionOpen] = useState(false);
 
-  const handleSubmit = form.handleSubmit((values) => {
-    console.log(values);
+  const handleSubmit = form.handleSubmit(async (values) => {
+    const loading = toast.loading("Creating server...");
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+
+      toast.success("Server created successfully!", {
+        id: loading,
+      });
+
+      router.navigate({
+        to: "/servers/$name",
+        params: {
+          name: values.name,
+        },
+      });
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to create server.", {
+        id: loading,
+      });
+    }
   });
 
   const { data: versions, isLoading, isError } = useMinecraftVersions();
@@ -148,7 +171,12 @@ export function NewServerForm() {
           <Dialog.Close asChild>
             <Button variant="outline">Cancel</Button>
           </Dialog.Close>
-          <Button type="submit">Create Server</Button>
+          <Button type="submit" disabled={form.formState.isSubmitting}>
+            {form.formState.isSubmitting && (
+              <Icons.Loader className="animate-spin size-4 mr-2" />
+            )}
+            Create Server
+          </Button>
         </Dialog.Footer>
       </form>
     </Form>
