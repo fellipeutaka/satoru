@@ -1,6 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { type IconComponent, Icons } from "../icons";
+import packageJson from "../../../package.json";
 import { ButtonStyles } from "../ui/button";
+import { type IconComponent, Icons } from "../ui/icons";
 
 const navItems = [
   {
@@ -23,7 +24,7 @@ export function Sidebar() {
   const { pathname } = useLocation();
 
   return (
-    <aside className="border-r">
+    <aside className="border-r flex flex-col justify-between">
       <nav className="flex flex-col gap-2">
         {navItems.map((item) => (
           <Link
@@ -31,10 +32,12 @@ export function Sidebar() {
             to={item.href}
             className={ButtonStyles({
               variant: "ghost",
-              className:
+              className: [
+                "justify-start",
                 pathname === item.href
-                  ? "bg-muted hover:bg-muted"
-                  : "hover:bg-transparent",
+                  ? "bg-accent text-accent-foreground"
+                  : "hover:bg-accent/50 text-accent-foreground",
+              ],
             })}
           >
             <item.icon className="size-4 mr-2" />
@@ -42,6 +45,18 @@ export function Sidebar() {
           </Link>
         ))}
       </nav>
+      <a
+        href={packageJson.repository.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={ButtonStyles({
+          className: "w-full",
+          variant: "outline",
+        })}
+      >
+        <Icons.GitHub className="size-4 mr-2" />
+        GitHub
+      </a>
     </aside>
   );
 }
