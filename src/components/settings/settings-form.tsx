@@ -6,8 +6,9 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "~/components/ui/button";
 import { Form } from "~/components/ui/form";
-import { Input, InputStyles } from "~/components/ui/input";
+import { InputStyles } from "~/components/ui/input";
 import { settingsStore } from "~/store/settings";
+import { SettingsNgrokField } from "./settings-ngrok-field";
 
 const settingsFormSchema = z.object({
   minecraftFolder: z.string(),
@@ -15,7 +16,7 @@ const settingsFormSchema = z.object({
   ngrokToken: z.string().optional(),
 });
 
-type SettingsFormValues = z.infer<typeof settingsFormSchema>;
+export type SettingsFormValues = z.infer<typeof settingsFormSchema>;
 
 export function SettingsForm() {
   const form = useForm<SettingsFormValues>({
@@ -124,32 +125,7 @@ export function SettingsForm() {
           )}
         />
 
-        <Form.Field
-          control={form.control}
-          name="ngrokToken"
-          render={({ field }) => (
-            <Form.Item>
-              <Form.Label>Ngrok token</Form.Label>
-              <Form.Control>
-                <Input placeholder="Ngrok token" {...field} />
-              </Form.Control>
-              <Form.Description>
-                This is the token used to authenticate with Ngrok. You can get
-                one from{" "}
-                <a
-                  href="https://dashboard.ngrok.com/get-started/your-authtoken"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500"
-                >
-                  here
-                </a>
-                .
-              </Form.Description>
-              <Form.Message />
-            </Form.Item>
-          )}
-        />
+        <SettingsNgrokField />
 
         <Button
           type="submit"
