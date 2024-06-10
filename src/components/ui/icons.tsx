@@ -44,6 +44,23 @@ export const Icons = {
       <path d="M12 2v4M16.2 7.8l2.9-2.9M18 12h4M16.2 16.2l2.9 2.9M12 18v4M4.9 19.1l2.9-2.9M2 12h4M4.9 4.9l2.9 2.9" />
     </svg>
   ),
+  DotFilled: (props) => (
+    <svg
+      role="img"
+      aria-label="Dot Filled"
+      width={15}
+      height={15}
+      viewBox="0 0 15 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M9.875 7.5a2.375 2.375 0 11-4.75 0 2.375 2.375 0 014.75 0z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
   Eye: (props) => (
     <svg
       role="img"
@@ -154,6 +171,24 @@ export const Icons = {
       {...props}
     >
       <path d="M6 9l6 6 6-6" />
+    </svg>
+  ),
+  ChevronRight: (props) => (
+    <svg
+      role="img"
+      aria-label="Chevron Right"
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M9 18l6-6-6-6" />
     </svg>
   ),
   Server: (props) => (
