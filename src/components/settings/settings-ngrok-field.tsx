@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
+import type { Settings } from "~/store/settings";
 import { Form } from "../ui/form";
 import { Icons } from "../ui/icons";
 import { InputStyles } from "../ui/input";
-import type { SettingsFormValues } from "./settings-form";
 
 export function SettingsNgrokField() {
-  const form = useFormContext<SettingsFormValues>();
+  const form = useFormContext<Settings>();
   const [isVisible, setIsVisible] = useState(false);
 
   return (

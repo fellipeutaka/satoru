@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { queryKeys } from "~/lib/tanstack-query";
 
 interface GetVersionsResponse {
   latest: {
@@ -16,7 +17,7 @@ interface GetVersionsResponse {
 
 export function useMinecraftVersions() {
   return useQuery({
-    queryKey: ["minecraft-versions"],
+    queryKey: [queryKeys.versions],
     queryFn: async ({ signal }) => {
       const response = await fetch(
         "https://piston-meta.mojang.com/mc/game/version_manifest.json",

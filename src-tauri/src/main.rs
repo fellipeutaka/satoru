@@ -24,10 +24,32 @@ fn get_java_version() -> Result<String, String> {
     }
 }
 
+#[tauri::command]
+fn get_servers(server_folder: String) -> Result<Vec<String>, String> {
+    let output = Command::new("cmd")
+        .current_dir(server_folder)
+        .args(["/C", "dir /b"])
+        .output();
+
+    match output {
+        Ok(output) => {
+            if output.status.success() {
+                let servers = String::from_utf8(output.stdout).unwrap();
+                Ok(servers.lines().map(|s| s.to_string()).collect())
+            } else {
+                Err(String::from_utf8(output.stderr).unwrap())
+            }
+        },
+        Err(error) => {
+            Err(error.to_string())
+        }
+    }
+}
+
 fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_store::Builder::default().build())
-        .invoke_handler(tauri::generate_handler![get_java_version])
+        .invoke_handler(tauri::generate_handler![get_java_version, get_servers])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

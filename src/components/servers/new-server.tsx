@@ -7,9 +7,9 @@ export function NewServer() {
   return (
     <Dialog>
       <Dialog.Trigger asChild>
-        <Button variant="secondary" className="h-full p-6">
+        <Button variant="secondary" className="size-full p-6">
           <div className="flex flex-col items-center gap-4">
-            <Icons.Server className="h-10 w-10" />
+            <Icons.Plus className="size-10" />
             <p className="text-sm">New Server</p>
           </div>
         </Button>

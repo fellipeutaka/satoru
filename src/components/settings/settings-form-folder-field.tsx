@@ -1,23 +1,21 @@
 import { open } from "@tauri-apps/api/dialog";
 import { useFormContext } from "react-hook-form";
+import type { Settings } from "~/store/settings";
 import { Form } from "../ui/form";
 import { InputStyles } from "../ui/input";
-import type { SettingsFormValues } from "./settings-form";
 
 interface SettingsFormFolderFieldProps {
-  name: keyof SettingsFormValues;
+  name: keyof Settings;
   label: string;
   description: string;
-  placeholder: string;
 }
 
 export function SettingsFormFolderField({
   name,
   label,
   description,
-  placeholder,
 }: SettingsFormFolderFieldProps) {
-  const form = useFormContext<SettingsFormValues>();
+  const form = useFormContext<Settings>();
 
   return (
     <Form.Field
@@ -43,7 +41,7 @@ export function SettingsFormFolderField({
               }}
               {...field}
             >
-              {field.value || placeholder}
+              {field.value}
             </button>
           </Form.Control>
           <Form.Description>{description}</Form.Description>

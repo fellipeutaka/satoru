@@ -14,11 +14,11 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { Route as rootRoute } from "./routes/__root";
 import { Route as IndexImport } from "./routes/index";
+import { Route as SettingsIndexImport } from "./routes/settings/index";
 import { Route as ServersIndexImport } from "./routes/servers/index";
 
 // Create Virtual Routes
 
-const SettingsIndexLazyImport = createFileRoute("/settings/")();
 const ServersNameLazyImport = createFileRoute("/servers/$name")();
 
 // Create/Update Routes
@@ -28,12 +28,10 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any);
 
-const SettingsIndexLazyRoute = SettingsIndexLazyImport.update({
+const SettingsIndexRoute = SettingsIndexImport.update({
   path: "/settings/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import("./routes/settings/index.lazy").then((d) => d.Route),
-);
+} as any);
 
 const ServersIndexRoute = ServersIndexImport.update({
   path: "/servers/",
@@ -76,7 +74,7 @@ declare module "@tanstack/react-router" {
       id: "/settings/";
       path: "/settings";
       fullPath: "/settings";
-      preLoaderRoute: typeof SettingsIndexLazyImport;
+      preLoaderRoute: typeof SettingsIndexImport;
       parentRoute: typeof rootRoute;
     };
   }
@@ -88,7 +86,7 @@ export const routeTree = rootRoute.addChildren({
   IndexRoute,
   ServersNameLazyRoute,
   ServersIndexRoute,
-  SettingsIndexLazyRoute,
+  SettingsIndexRoute,
 });
 
 /* prettier-ignore-end */
@@ -115,7 +113,7 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "servers/index.tsx"
     },
     "/settings/": {
-      "filePath": "settings/index.lazy.tsx"
+      "filePath": "settings/index.tsx"
     }
   }
 }

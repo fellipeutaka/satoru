@@ -15,9 +15,9 @@ import { Input } from "../ui/input";
 import { Popover } from "../ui/popover";
 
 const newServerFormSchema = z.object({
-  name: z.string().trim().min(1),
-  description: z.string().trim().min(1),
-  version: z.string().trim().min(1),
+  name: z.string().trim().min(1, "Server name is required."),
+  description: z.string().trim().min(1, "Server description is required."),
+  version: z.string().trim().min(1, "Server version is required."),
 });
 
 type NewServerFormValues = z.infer<typeof newServerFormSchema>;
@@ -25,6 +25,11 @@ type NewServerFormValues = z.infer<typeof newServerFormSchema>;
 export function NewServerForm() {
   const form = useForm<NewServerFormValues>({
     resolver: zodResolver(newServerFormSchema),
+    defaultValues: {
+      name: "",
+      description: "",
+      version: "",
+    },
   });
   const router = useRouter();
   const [isVersionOpen, setIsVersionOpen] = useState(false);

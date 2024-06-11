@@ -1,8 +1,8 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { SettingsForm } from "~/components/settings/settings-form";
 import { Separator } from "~/components/ui/separator";
 
-export const Route = createLazyFileRoute("/settings/")({
+export const Route = createFileRoute("/settings/")({
   component: () => (
     <main className="space-y-6">
       <header>

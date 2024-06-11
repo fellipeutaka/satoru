@@ -22,7 +22,7 @@ const navItems = [
 
 export function Sidebar() {
   return (
-    <aside className="border-r flex flex-col justify-between">
+    <aside className="border-r flex flex-col justify-between sticky top-0 h-screen">
       <nav className="flex flex-col gap-2">
         {navItems.map((item) => (
           <Link
@@ -34,8 +34,8 @@ export function Sidebar() {
                 "justify-start [&.active]:bg-accent [&:not(.active)]:hover:bg-accent/50",
             })}
           >
-            <item.icon className="size-4 mr-2" />
-            <span className="select-none">{item.title}</span>
+            <item.icon className="size-4 mr-2 shrink-0" />
+            {item.title}
           </Link>
         ))}
       </nav>
@@ -48,7 +48,7 @@ export function Sidebar() {
           variant: "outline",
         })}
       >
-        <Icons.GitHub className="size-4 mr-2" />
+        <Icons.GitHub className="size-4 mr-2 shrink-0" />
         GitHub
       </a>
     </aside>
