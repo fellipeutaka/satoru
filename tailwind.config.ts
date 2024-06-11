@@ -1,9 +1,9 @@
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
+import plugin from "tailwindcss/plugin";
 
 export default {
   content: ["./index.html", "./src/**/*.tsx"],
-  prefix: "",
   theme: {
     container: {
       center: true,
@@ -69,5 +69,16 @@ export default {
       },
     },
   },
-  plugins: [tailwindcssAnimate],
+  plugins: [
+    tailwindcssAnimate,
+    plugin(({ addComponents, theme }) => {
+      addComponents({
+        ".shell": {
+          display: "flex",
+          flexDirection: "column",
+          gap: theme("spacing.6"),
+        },
+      });
+    }),
+  ],
 } satisfies Config;

@@ -1,10 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { useMinecraftVersions } from "~/hooks/use-minecraft-versions";
+import { getMinecraftVersionsQuery } from "~/lib/tanstack-query/queries/get-minecraft-versions";
 import { cn } from "~/lib/utils";
 import { Button } from "../ui/button";
 import { Command } from "../ui/command";
@@ -58,7 +59,11 @@ export function NewServerForm() {
     }
   });
 
-  const { data: versions, isLoading, isError } = useMinecraftVersions();
+  const {
+    data: versions,
+    isLoading,
+    isError,
+  } = useQuery(getMinecraftVersionsQuery);
 
   return (
     <Form {...form}>

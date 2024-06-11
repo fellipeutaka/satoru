@@ -43,6 +43,16 @@
           }
         }
       }
+    },
+    {
+      "include": ["./src/routes/**/*.tsx"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": "off"
+          }
+        }
+      }
     }
   ],
   "javascript": {

@@ -1,4 +1,5 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
+import { Header } from "~/components/layout/header";
 import { Separator } from "~/components/ui/separator";
 
 export const Route = createLazyFileRoute("/servers/$name")({
@@ -7,14 +8,11 @@ export const Route = createLazyFileRoute("/servers/$name")({
 
 function Component() {
   return (
-    <main className="space-y-6">
-      <header>
-        <h1 className="text-lg font-medium">Servers</h1>
-        <h2 className="text-sm text-muted-foreground">
-          This is the servers page. You can add servers here for your
-          application.
-        </h2>
-      </header>
+    <main className="shell">
+      <Header
+        title="Servers"
+        description="This is the servers page. You can add servers here for your application."
+      />
       <Separator />
       <div>Hello /(servers)/$name!</div>
     </main>
