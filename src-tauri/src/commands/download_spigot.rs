@@ -1,17 +1,26 @@
 use std::io::Write;
 
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+pub struct DownloadSpigotProps {
+    pub server_dir: String,
+    pub version: String,
+}
+
 #[tauri::command]
-pub async fn download_spigot() -> Result<String, String> {
-    let url = "https://download.getbukkit.org/spigot/spigot-1.20.1.jar";
+pub async fn download_spigot(props: DownloadSpigotProps) -> Result<String, String> {
+    let url = format!("https://download.getbukkit.org/spigot/spigot-{}.jar", props.version);
     let response = reqwest::get(url).await;
 
     match response {
-        Ok(file) => {
-            // Save the file to Downloads (download_dir) folder using Rust fs
-            let mut dest = std::fs::File::create("C:\\Users\\Public\\Downloads\\spigot-1.20.1.jar").unwrap();
-            let content = file.bytes().await.unwrap();
-            dest.write_all(&content).unwrap();
-            Ok("Downloaded".to_string())
+        Ok(mut file) => {
+            let path = std::path::Path::new(&props.server_dir).join("server.jar");
+            let mut dest = std::fs::File::create(path.clone()).expect("Failed to create file"); 
+            while let Some(chunk) = file.chunk().await.map_err(|e| e.to_string())? {
+                dest.write_all(&chunk).map_err(|e| e.to_string())?;
+            }
+            Ok(format!("File downloaded to {}", path.display()))
         },
         Err(err) => Err(err.to_string()),
     }

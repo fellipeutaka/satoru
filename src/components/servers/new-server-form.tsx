@@ -6,7 +6,9 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { getMinecraftVersionsQuery } from "~/lib/tanstack-query/queries/get-minecraft-versions";
+import { createServer } from "~/lib/tauri/commands";
 import { cn } from "~/lib/utils";
+import { getSettings } from "~/utils/get-settings";
 import { Button } from "../ui/button";
 import { Command } from "../ui/command";
 import { Dialog } from "../ui/dialog";
@@ -21,7 +23,7 @@ const newServerFormSchema = z.object({
   version: z.string().trim().min(1, "Server version is required."),
 });
 
-type NewServerFormValues = z.infer<typeof newServerFormSchema>;
+export type NewServerFormValues = z.infer<typeof newServerFormSchema>;
 
 export function NewServerForm() {
   const form = useForm<NewServerFormValues>({
@@ -39,7 +41,13 @@ export function NewServerForm() {
     const loading = toast.loading("Creating server...");
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      const { serverFolder } = await getSettings();
+      await createServer({
+        name: values.name,
+        description: values.description,
+        version: values.version,
+        server_dir: serverFolder,
+      });
 
       toast.success("Server created successfully!", {
         id: loading,

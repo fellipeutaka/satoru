@@ -16,7 +16,8 @@
     "rules": {
       "all": true,
       "style": {
-        "noImplicitBoolean": "off"
+        "noImplicitBoolean": "off",
+        "useNamingConvention": "off"
       }
     }
   },
@@ -30,16 +31,6 @@
         "rules": {
           "style": {
             "noDefaultExport": "off"
-          }
-        }
-      }
-    },
-    {
-      "include": ["./tailwind.config.ts", "./src/components/ui/**/*.tsx"],
-      "linter": {
-        "rules": {
-          "style": {
-            "useNamingConvention": "off"
           }
         }
       }

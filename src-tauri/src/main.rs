@@ -2,6 +2,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod commands;
+mod utils;
 use commands::{get_java_version::get_java_version, get_servers::get_servers, create_server::create_server, download_spigot::download_spigot};
 
 fn main() {

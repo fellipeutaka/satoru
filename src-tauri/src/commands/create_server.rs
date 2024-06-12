@@ -1,21 +1,29 @@
-use std::process::Command;
+use std::{path::Path, process::Command};
+use serde::Deserialize;
 
-use crate::commands::download_spigot::download_spigot;
+use crate::{commands::download_spigot::{download_spigot, DownloadSpigotProps}, utils::create_folder::create_folder};
+
+#[derive(Deserialize)]
+pub struct CreateServerProps {
+    pub name: String,
+    pub description: String,
+    pub version: String,
+    pub server_dir: String,
+}
 
 #[tauri::command]
-pub async fn create_server() -> Result<(), String> {
+pub async fn create_server(props: CreateServerProps) -> Result<(), String> {
+    let server_path = Path::new(&props.server_dir).join(&props.name);
+    create_folder(server_path.to_str().unwrap()).await?;
 
-    download_spigot().await?;
+    download_spigot(DownloadSpigotProps {
+        server_dir: server_path.to_str().unwrap().to_string(),
+        version: props.version,
+    }).await?;
 
-    let downloads_path = directories::UserDirs::new()
-        .and_then(|dirs| dirs.download_dir().map(|p| p.to_path_buf()))
-        .ok_or_else(|| "Cannot find downloads directory".to_string())?
-        .join("server.jar"); // Specify your JAR file or Java application name
-
-        println!("{:?}", downloads_path);
-    let output = Command::new("powershell")
-        .args(&["-Command", &format!("java -Xmx1024M -Xms1024M -jar {}", downloads_path.display())])
-        .arg("nogui")
+    let output = Command::new("java")
+        .current_dir(server_path)
+        .args(["-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"])
         .output();
 
     if let Ok(output) = output {
