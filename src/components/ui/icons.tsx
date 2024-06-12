@@ -247,6 +247,142 @@ export const Icons = {
       <path d="M5 12h14M12 5v14" />
     </svg>
   ),
+  Play: (props) => (
+    <svg
+      role="img"
+      aria-label="Play"
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M6 3L20 12 6 21 6 3z" />
+    </svg>
+  ),
+  Pause: (props) => (
+    <svg
+      role="img"
+      aria-label="Pause"
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <rect x={14} y={4} width={4} height={16} rx={1} />
+      <rect x={6} y={4} width={4} height={16} rx={1} />
+    </svg>
+  ),
+  Clock: (props) => (
+    <svg
+      role="img"
+      aria-label="Clock"
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <circle cx={12} cy={12} r={10} />
+      <path d="M12 6L12 12 16 14" />
+    </svg>
+  ),
+  Cpu: (props) => (
+    <svg
+      role="img"
+      aria-label="CPU"
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <rect width={16} height={16} x={4} y={4} rx={2} />
+      <rect width={6} height={6} x={9} y={9} rx={1} />
+      <path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2" />
+    </svg>
+  ),
+  MemoryStick: (props) => (
+    <svg
+      role="img"
+      aria-label="Memory Stick"
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M6 19v-3M10 19v-3M14 19v-3M18 19v-3M8 11V9M16 11V9M12 11V9M2 15h20M2 7a2 2 0 012-2h16a2 2 0 012 2v1.1a2 2 0 000 3.837V17a2 2 0 01-2 2H4a2 2 0 01-2-2v-5.1a2 2 0 000-3.837z" />
+    </svg>
+  ),
+  HardDrive: (props) => (
+    <svg
+      role="img"
+      aria-label="Hard Drive"
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M22 12L2 12" />
+      <path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z" />
+      <path d="M6 16L6.01 16" />
+      <path d="M10 16L10.01 16" />
+    </svg>
+  ),
+  Network: (props) => (
+    <svg
+      role="img"
+      aria-label="Network"
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <rect x={16} y={16} width={6} height={6} rx={1} />
+      <rect x={2} y={16} width={6} height={6} rx={1} />
+      <rect x={9} y={2} width={6} height={6} rx={1} />
+      <path d="M5 16v-3a1 1 0 011-1h12a1 1 0 011 1v3M12 12V8" />
+    </svg>
+  ),
   Server: (props) => (
     <svg
       role="img"
