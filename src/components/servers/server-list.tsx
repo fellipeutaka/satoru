@@ -1,7 +1,8 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 import { getServersQuery } from "~/lib/tanstack-query/queries/get-servers";
 import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
+import { ButtonStyles } from "../ui/button";
 import { Card } from "../ui/card";
 import { Icons } from "../ui/icons";
 import { Separator } from "../ui/separator";
@@ -61,7 +62,17 @@ export function ServerList() {
               </div>
             </Card.Content>
             <Card.Footer className="justify-end">
-              <Button variant="outline">See more details</Button>
+              <Link
+                to="/servers/$name"
+                params={{
+                  name: server.name,
+                }}
+                className={ButtonStyles({
+                  variant: "outline",
+                })}
+              >
+                See more details
+              </Link>
             </Card.Footer>
           </Card>
         ))}

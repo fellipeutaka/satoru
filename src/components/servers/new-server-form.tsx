@@ -1,21 +1,16 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { getMinecraftVersionsQuery } from "~/lib/tanstack-query/queries/get-minecraft-versions";
 import { createServer } from "~/lib/tauri/commands";
-import { cn } from "~/lib/utils";
 import { getSettings } from "~/utils/get-settings";
 import { Button } from "../ui/button";
-import { Command } from "../ui/command";
 import { Dialog } from "../ui/dialog";
 import { Form } from "../ui/form";
 import { Icons } from "../ui/icons";
 import { Input } from "../ui/input";
-import { Popover } from "../ui/popover";
+import { NewServerFormVersionField } from "./new-server-form-version-field";
 
 const newServerFormSchema = z.object({
   name: z.string().trim().min(1, "Server name is required."),
@@ -35,13 +30,13 @@ export function NewServerForm() {
     },
   });
   const router = useRouter();
-  const [isVersionOpen, setIsVersionOpen] = useState(false);
 
   const handleSubmit = form.handleSubmit(async (values) => {
     const loading = toast.loading("Creating server...");
 
     try {
       const { serverFolder } = await getSettings();
+
       await createServer({
         name: values.name,
         description: values.description,
@@ -66,12 +61,6 @@ export function NewServerForm() {
       });
     }
   });
-
-  const {
-    data: versions,
-    isLoading,
-    isError,
-  } = useQuery(getMinecraftVersionsQuery);
 
   return (
     <Form {...form}>
@@ -102,88 +91,8 @@ export function NewServerForm() {
             </Form.Item>
           )}
         />
-        <Form.Field
-          control={form.control}
-          name="version"
-          render={({ field }) => (
-            <Form.Item>
-              <Form.Label>Version</Form.Label>
-              <Popover open={isVersionOpen} onOpenChange={setIsVersionOpen}>
-                <Popover.Trigger asChild>
-                  <Form.Control>
-                    <Button
-                      className={cn(
-                        "flex w-full justify-between font-normal group",
-                        !field.value && "text-muted-foreground",
-                      )}
-                      variant="outline"
-                      role="combobox"
-                    >
-                      {field.value
-                        ? versions?.find(
-                            (version) => version.id === field.value,
-                          )?.id
-                        : "Select version"}
-                      <Icons.ChevronDown className="ml-2 size-4 opacity-50 transition-transform duration-200 group-aria-expanded:rotate-180" />
-                    </Button>
-                  </Form.Control>
-                </Popover.Trigger>
-                <Popover.Content
-                  avoidCollisions={false}
-                  side="bottom"
-                  className="w-[--radix-popper-anchor-width] p-0"
-                >
-                  <Command>
-                    <Command.Input
-                      placeholder="Search version..."
-                      className="h-9"
-                      disabled={isLoading}
-                    />
-                    <Command.Empty>
-                      {isLoading ? (
-                        <div className="flex justify-center items-center gap-2">
-                          <Icons.Loader className="animate-spin size-4" />
-                          Fetching versions...
-                        </div>
-                      ) : isError ? (
-                        "Failed to fetch versions."
-                      ) : (
-                        "Version not found."
-                      )}
-                    </Command.Empty>
-                    <Command.Group>
-                      <Command.List>
-                        {versions?.map((version) => (
-                          <Command.Item
-                            value={version.id}
-                            key={version.id}
-                            onSelect={() => {
-                              form.setValue("version", version.id, {
-                                shouldValidate: true,
-                              });
-                              setIsVersionOpen(false);
-                            }}
-                          >
-                            {version.id}
-                            <Icons.Check
-                              className={cn(
-                                "ml-auto size-4",
-                                version.id === field.value
-                                  ? "opacity-100"
-                                  : "opacity-0",
-                              )}
-                            />
-                          </Command.Item>
-                        ))}
-                      </Command.List>
-                    </Command.Group>
-                  </Command>
-                </Popover.Content>
-              </Popover>
-              <Form.Message />
-            </Form.Item>
-          )}
-        />
+
+        <NewServerFormVersionField />
 
         <Dialog.Footer>
           <Dialog.Close asChild>
