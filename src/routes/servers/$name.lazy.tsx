@@ -1,15 +1,23 @@
-import { Link, createLazyFileRoute } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { Link, createLazyFileRoute, useParams } from "@tanstack/react-router";
 import { Header } from "~/components/layout/header";
 import { Eula } from "~/components/servers/eula";
+import { EulaForm } from "~/components/servers/eula-form";
 import { ButtonStyles } from "~/components/ui/button";
 import { Icons } from "~/components/ui/icons";
 import { Separator } from "~/components/ui/separator";
+import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
 
 export const Route = createLazyFileRoute("/servers/$name")({
   component: Component,
 });
 
 function Component() {
+  const { name } = useParams({
+    from: "/servers/$name",
+  });
+  const { data } = useQuery(getServerQuery(name));
+
   return (
     <main className="shell">
       <Header
@@ -23,9 +31,14 @@ function Component() {
           Back to Servers
         </Link>
       </div>
-      <div className="container max-w-4xl">
-        <Eula />
-      </div>
+      {data?.eula_accepted ? (
+        <p>Eula accepted</p>
+      ) : (
+        <div className="container max-w-6xl">
+          <Eula />
+          <EulaForm />
+        </div>
+      )}
     </main>
   );
 }

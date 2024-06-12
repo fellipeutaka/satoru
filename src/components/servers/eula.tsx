@@ -4,7 +4,7 @@ import { Mdx } from "../ui/mdx";
 
 export function Eula() {
   return (
-    <>
+    <div className="border rounded-md p-6">
       <Mdx.h1>MINECRAFT END(ER)-USER LICENSE AGREEMENT (“EULA”)</Mdx.h1>
 
       <Mdx.h2>SUMMARY</Mdx.h2>
@@ -517,6 +517,6 @@ export function Eula() {
         infringers. We reserve the right to take down any content in our
         discretion.
       </Mdx.p>
-    </>
+    </div>
   );
 }

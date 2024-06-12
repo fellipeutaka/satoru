@@ -3,12 +3,12 @@
 
 mod commands;
 mod utils;
-use commands::{get_java_version::get_java_version, get_servers::get_servers, create_server::create_server, download_spigot::download_spigot};
+use commands::{accept_terms::accept_terms, get_java_version::get_java_version, get_server::get_server, get_servers::get_servers, create_server::create_server, download_spigot::download_spigot};
 
 fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_store::Builder::default().build())
-        .invoke_handler(tauri::generate_handler![get_java_version, get_servers, create_server, download_spigot])
+        .invoke_handler(tauri::generate_handler![accept_terms, get_java_version, get_server, get_servers, create_server, download_spigot])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
