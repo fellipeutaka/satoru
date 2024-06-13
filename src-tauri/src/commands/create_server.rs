@@ -1,7 +1,9 @@
-use std::{path::Path, process::Command};
+use std::{fs, path::Path};
 use serde::Deserialize;
 
 use crate::{commands::download_spigot::{download_spigot, DownloadSpigotProps}, utils::create_folder::create_folder};
+
+use super::run_server::run_server;
 
 #[derive(Deserialize)]
 pub struct CreateServerProps {
@@ -16,15 +18,21 @@ pub async fn create_server(props: CreateServerProps) -> Result<(), String> {
     let server_path = Path::new(&props.server_dir).join(&props.name);
     create_folder(server_path.to_str().unwrap()).await?;
 
+    // Create a satoru.json file with the server name, description and version
+    let server_props = serde_json::json!({
+        "name": props.name,
+        "description": props.description,
+        "version": props.version,
+    }).to_string();
+    let server_props_path = server_path.join("satoru.json");
+    fs::write(server_props_path, server_props).unwrap();
+
     download_spigot(DownloadSpigotProps {
         server_dir: server_path.to_str().unwrap().to_string(),
         version: props.version,
     }).await?;
 
-    let output = Command::new("java")
-        .current_dir(server_path)
-        .args(["-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"])
-        .output();
+    let output = run_server(server_path.to_str().unwrap().to_string());
 
     if let Ok(output) = output {
         if output.status.success() {
