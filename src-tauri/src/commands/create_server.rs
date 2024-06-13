@@ -1,9 +1,7 @@
 use std::{fs, path::Path};
 use serde::Deserialize;
 
-use crate::{commands::download_spigot::{download_spigot, DownloadSpigotProps}, utils::create_folder::create_folder};
-
-use super::run_server::run_server;
+use crate::{commands::download_spigot::{download_spigot, DownloadSpigotProps}, utils::{create_folder::create_folder, run_server::run_server}};
 
 #[derive(Deserialize)]
 pub struct CreateServerProps {
@@ -32,7 +30,7 @@ pub async fn create_server(props: CreateServerProps) -> Result<(), String> {
         version: props.version,
     }).await?;
 
-    let output = run_server(server_path.to_str().unwrap().to_string());
+    let output = run_server(server_path.to_str().unwrap().to_string(), "1G".to_string());
 
     if let Ok(output) = output {
         if output.status.success() {

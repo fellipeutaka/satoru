@@ -3,6 +3,7 @@ import { Link, createFileRoute, useParams } from "@tanstack/react-router";
 import { Header } from "~/components/layout/header";
 import { ServerDashboard } from "~/components/servers/server-dashboard";
 import { ServerEulaPage } from "~/components/servers/server-eula-page";
+import { ServerOpenFolderButton } from "~/components/servers/server-open-folder-button";
 import { ServerToggleButton } from "~/components/servers/server-toggle-button";
 import { ButtonStyles } from "~/components/ui/button";
 import { Icons } from "~/components/ui/icons";
@@ -49,8 +50,9 @@ function Component() {
             <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
           </Tabs.List>
 
-          <div>
+          <div className="flex items-center gap-4">
             <ServerToggleButton />
+            <ServerOpenFolderButton />
           </div>
         </div>
         <Tabs.Content value="dashboard">

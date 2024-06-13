@@ -65,3 +65,7 @@ export async function acceptTerms(props: AcceptTermsProps) {
     throw new Error("Failed to create a server");
   }
 }
+
+export async function openFolder(path: string) {
+  await invoke("open_folder", { path });
+}

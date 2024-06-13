@@ -284,6 +284,24 @@ export const Icons = {
       <rect x={6} y={4} width={4} height={16} rx={1} />
     </svg>
   ),
+  FolderOpen: (props) => (
+    <svg
+      role="img"
+      aria-label="Folder Open"
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M6 14l1.5-2.9A2 2 0 019.24 10H20a2 2 0 011.94 2.5l-1.54 6a2 2 0 01-1.95 1.5H4a2 2 0 01-2-2V5a2 2 0 012-2h3.9a2 2 0 011.69.9l.81 1.2a2 2 0 001.67.9H18a2 2 0 012 2v2" />
+    </svg>
+  ),
   Clock: (props) => (
     <svg
       role="img"
