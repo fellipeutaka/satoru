@@ -22,7 +22,7 @@
     }
   },
   "files": {
-    "ignore": ["./src/routeTree.gen.ts"]
+    "ignore": ["./src/routeTree.gen.ts", "./src-tauri/**/*"]
   },
   "overrides": [
     {

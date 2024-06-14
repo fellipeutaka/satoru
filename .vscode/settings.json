@@ -1,0 +1,18 @@
+{
+  "cSpell.words": [
+    "biomejs",
+    "clsx",
+    "cmdk",
+    "hookform",
+    "satoru",
+    "sonner",
+    "tailwindcss",
+    "tanstack",
+    "tauri"
+  ],
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  }
+}

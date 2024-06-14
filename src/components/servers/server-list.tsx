@@ -8,6 +8,7 @@ import { Icons } from "../ui/icons";
 import { Separator } from "../ui/separator";
 import { NewServerDialog } from "./new-server-dialog";
 import { ServerListEmpty } from "./server-list-empty";
+import { cn } from "~/lib/utils";
 
 export function ServerList() {
   const { data: servers } = useSuspenseQuery(getServersQuery);
@@ -28,10 +29,13 @@ export function ServerList() {
               <div className="flex items-center gap-2 text-sm">
                 <Badge variant="outline">
                   <div
-                    className="w-2 h-2 rounded-full bg-green-500 mr-2"
+                    className={cn(
+                      "w-2 h-2 rounded-full mr-2",
+                      server.status === "Offline" ? "bg-red-500" : "bg-green-500",
+                    )}
                     aria-hidden
                   />
-                  Online
+                  {server.status === 'Online' ? 'Online' : 'Offline'}
                 </Badge>
                 <Separator orientation="vertical" className="h-4" />
                 <Badge variant="secondary">{server.version}</Badge>

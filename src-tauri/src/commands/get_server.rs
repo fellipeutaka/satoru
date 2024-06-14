@@ -2,6 +2,8 @@ use std::path::Path;
 
 use serde::{Deserialize, Serialize};
 
+use crate::data::servers::SERVER_LIST;
+
 #[derive(Deserialize)]
 pub struct GetServerProps {
     pub server_dir: String,
@@ -88,16 +90,10 @@ pub struct ServerProperties {
 }
 
 #[derive(Deserialize, Serialize)]
-pub enum ServerStatus {
-    Running,
-    Stopped,
-}
-
-#[derive(Deserialize, Serialize)]
 pub struct GetServerResponse {
     pub eula_accepted: bool,
+    pub is_running: bool,
     // pub server_properties: ServerProperties,
-    pub status: ServerStatus,
 }
 
 // The function get_server will return the following properties:
@@ -113,6 +109,8 @@ eula=false
 
 #[tauri::command]
 pub fn get_server(props: GetServerProps) -> Result<GetServerResponse, String> {
+    let server_list = SERVER_LIST.lock().unwrap();
+
     let server_path = Path::new(&props.server_dir).join(&props.name);
     let files = std::fs::read_dir(server_path.clone());
 
@@ -123,16 +121,14 @@ pub fn get_server(props: GetServerProps) -> Result<GetServerResponse, String> {
 
     // Get server.properties
     let server_properties_path = server_path.join("server.properties");
-    let server_properties = std::fs::read_to_string(server_properties_path).unwrap_or("".to_string());
-
-    let status = match files {
-        Ok(_) => ServerStatus::Running,
-        Err(_) => ServerStatus::Stopped,
-    };
+    let server_properties =
+        std::fs::read_to_string(server_properties_path).unwrap_or("".to_string());
 
     Ok(GetServerResponse {
         eula_accepted,
         // server_properties,
-        status,
+        is_running: server_list
+            .iter()
+            .any(|server| server.server_path == server_path.to_str().unwrap().to_string()),
     })
 }

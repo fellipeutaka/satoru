@@ -1,8 +1,15 @@
 import { invoke } from "@tauri-apps/api";
 
+interface Server {
+  is_running: boolean;
+  name: string;
+  path: string;
+  version: string;
+}
+
 export async function getServers(serverFolder: string) {
   try {
-    return await invoke<string[]>("get_servers", { serverFolder });
+    return await invoke<Server[]>("get_servers", { serverFolder });
   } catch (err) {
     if (typeof err === "string") {
       throw new Error(err);
@@ -36,7 +43,7 @@ interface GetServerProps {
 
 interface GetServerResponse {
   eula_accepted: boolean;
-  status: "Running";
+  is_running: boolean
 }
 
 export async function getServer(props: GetServerProps) {
@@ -46,7 +53,7 @@ export async function getServer(props: GetServerProps) {
     if (typeof err === "string") {
       throw new Error(err);
     }
-    throw new Error("Failed to create a server");
+    throw new Error("Failed to get server");
   }
 }
 
@@ -62,10 +69,37 @@ export async function acceptTerms(props: AcceptTermsProps) {
     if (typeof err === "string") {
       throw new Error(err);
     }
-    throw new Error("Failed to create a server");
+    throw new Error("Failed to accept terms");
   }
 }
 
 export async function openFolder(path: string) {
   await invoke("open_folder", { path });
+}
+
+interface ToggleServerProps {
+  serverPath: string;
+  ramAmount: string;
+}
+
+export async function startServer(props: ToggleServerProps) {
+  try {
+    await invoke<GetServerResponse>("start_server", { ...props });
+  } catch (err) {
+    if (typeof err === "string") {
+      throw new Error(err);
+    }
+    throw new Error("Failed to run server");
+  }
+}
+
+export async function stopServer(serverPath: string) {
+  try {
+    await invoke<GetServerResponse>("stop_server", { serverPath });
+  } catch (err) {
+    if (typeof err === "string") {
+      throw new Error(err);
+    }
+    throw new Error("Failed to run server");
+  }
 }

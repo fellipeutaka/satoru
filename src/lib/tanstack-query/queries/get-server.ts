@@ -8,9 +8,7 @@ export const getServerQuery = (name: string) =>
     queryKey: [queryKeys.servers, name],
     queryFn: async () => {
       const { serverFolder } = await getSettings();
-      const server = await getServer({ name, server_dir: serverFolder });
-
-      return server;
+      return await getServer({ name, server_dir: serverFolder });
     },
     throwOnError: true,
   });

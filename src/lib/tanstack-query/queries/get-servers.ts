@@ -10,13 +10,13 @@ export const getServersQuery = queryOptions({
     const servers = await getServers(serverFolder);
 
     return servers.map((server) => ({
-      id: server,
-      name: server,
+      id: server.path,
+      name: server.name,
       maxPlayers: 100,
       onlinePlayers: 12,
-      version: "1.17.1",
+      version: server.version,
       ip: "mc.example.com",
-      status: "online",
+      status: server.is_running ? "Online": "Offline",
       createdAt: new Date(),
     }));
   },

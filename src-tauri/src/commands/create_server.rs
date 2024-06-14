@@ -1,7 +1,10 @@
-use std::{fs, path::Path};
 use serde::Deserialize;
+use std::{fs, path::Path};
 
-use crate::{commands::download_spigot::{download_spigot, DownloadSpigotProps}, utils::{create_folder::create_folder, run_server::run_server}};
+use crate::{
+    commands::download_spigot::{download_spigot, DownloadSpigotProps},
+    utils::{create_folder::create_folder, run_server::run_server},
+};
 
 #[derive(Deserialize)]
 pub struct CreateServerProps {
@@ -21,14 +24,16 @@ pub async fn create_server(props: CreateServerProps) -> Result<(), String> {
         "name": props.name,
         "description": props.description,
         "version": props.version,
-    }).to_string();
+    })
+    .to_string();
     let server_props_path = server_path.join("satoru.json");
     fs::write(server_props_path, server_props).unwrap();
 
     download_spigot(DownloadSpigotProps {
         server_dir: server_path.to_str().unwrap().to_string(),
         version: props.version,
-    }).await?;
+    })
+    .await?;
 
     let output = run_server(server_path.to_str().unwrap().to_string(), "1G".to_string());
 

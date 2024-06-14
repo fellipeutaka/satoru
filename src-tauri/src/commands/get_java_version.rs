@@ -2,9 +2,7 @@ use std::process::Command;
 
 #[tauri::command]
 pub fn get_java_version() -> Result<String, String> {
-    let output = Command::new("cmd")
-        .args(["/C", "javac --version"])
-        .output();
+    let output = Command::new("cmd").args(["/C", "javac --version"]).output();
 
     if let Ok(output) = output {
         if output.status.success() {
@@ -19,9 +17,7 @@ pub fn get_java_version() -> Result<String, String> {
     match install_output {
         Ok(output) => {
             if output.status.success() {
-                let verify_output = Command::new("cmd")
-                    .args(["/C", "javac -version"])
-                    .output();
+                let verify_output = Command::new("cmd").args(["/C", "javac -version"]).output();
 
                 if let Ok(output) = verify_output {
                     if output.status.success() {
@@ -32,7 +28,7 @@ pub fn get_java_version() -> Result<String, String> {
             } else {
                 return Err(String::from_utf8_lossy(&output.stderr).to_string());
             }
-        },
+        }
         Err(error) => return Err(error.to_string()),
     }
 }

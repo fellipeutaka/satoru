@@ -1,8 +1,7 @@
 import { useParams } from "@tanstack/react-router";
-import { join } from "@tauri-apps/api/path";
 import { useTransition } from "react";
 import { openFolder } from "~/lib/tauri/commands";
-import { getSettings } from "~/utils/get-settings";
+import { getServerPath } from "~/utils/get-server-path";
 import { Button } from "../ui/button";
 import { Icons } from "../ui/icons";
 import { Tooltip } from "../ui/tooltip";
@@ -16,8 +15,7 @@ export function ServerOpenFolderButton() {
 
   function handleToggleServer() {
     startTransition(async () => {
-      const { serverFolder } = await getSettings();
-      const path = await join(serverFolder, name);
+      const path = await getServerPath(name);
       await openFolder(path);
     });
   }
