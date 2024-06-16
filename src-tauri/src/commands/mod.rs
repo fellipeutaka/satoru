@@ -6,6 +6,8 @@ pub mod get_server;
 pub mod get_server_logs;
 pub mod get_server_status;
 pub mod get_servers;
+pub mod get_system_info;
 pub mod open_folder;
+pub mod save_server_settings;
 pub mod start_server;
 pub mod stop_server;

@@ -1,7 +1,18 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { useParams } from "@tanstack/react-router";
+import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
+import { getSystemInfoQuery } from "~/lib/tanstack-query/queries/get-system-info";
 import { Card } from "../ui/card";
 import { Icons } from "../ui/icons";
 
 export function ServerDashboard() {
+  const { data: systemInfo } = useSuspenseQuery(getSystemInfoQuery);
+
+  const { name } = useParams({
+    from: "/servers/$name",
+  });
+  const { data: server } = useSuspenseQuery(getServerQuery(name));
+
   return (
     <div className="grid gap-4 lg:grid-cols-3 sm:grid-cols-2 flex-1 my-6">
       <Card>
@@ -13,7 +24,10 @@ export function ServerDashboard() {
         </Card.Header>
         <Card.Content>
           <span className="font-bold text-2xl tracking-tight">42</span>
-          <p className="text-muted-foreground text-xs">Online / 100 max</p>
+          <p className="text-muted-foreground text-xs">
+            {server.is_running ? "Online" : "Offline"} /{" "}
+            {server.server_properties.max_players} max
+          </p>
         </Card.Content>
       </Card>
 
@@ -47,8 +61,12 @@ export function ServerDashboard() {
           <Icons.MemoryStick className="size-4" />
         </Card.Header>
         <Card.Content>
-          <span className="font-bold text-2xl tracking-tight">12.5 GB</span>
-          <p className="text-muted-foreground text-xs">of 16 GB total</p>
+          <span className="font-bold text-2xl tracking-tight">
+            {systemInfo.memoryUsed} GB
+          </span>
+          <p className="text-muted-foreground text-xs">
+            of {systemInfo.memoryTotal} GB total
+          </p>
         </Card.Content>
       </Card>
 

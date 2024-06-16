@@ -15,8 +15,9 @@ export function Input({
       ref={ref}
       type={type}
       className={InputStyles({ className })}
-      autoComplete="off"
+      autoComplete="one-time-code"
       autoCorrect="off"
+      autoSave="off"
       {...props}
     />
   );

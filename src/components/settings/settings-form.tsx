@@ -18,10 +18,12 @@ export function SettingsForm() {
   const handleSubmit = form.handleSubmit((data) => {
     toast.promise(settingsStore.set("settings", data), {
       loading: "Updating settings...",
-      success: "Settings updated successfully!",
+      success: () => {
+        form.reset(data, { keepDirty: false });
+        return "Settings updated successfully!";
+      },
       error: "Failed to update settings.",
     });
-    form.reset(data, { keepValues: true });
   });
 
   return (

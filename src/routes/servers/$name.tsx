@@ -4,6 +4,7 @@ import { Header } from "~/components/layout/header";
 import { ServerDashboard } from "~/components/servers/server-dashboard";
 import { ServerEulaPage } from "~/components/servers/server-eula-page";
 import { ServerOpenFolderButton } from "~/components/servers/server-open-folder-button";
+import { ServerSettingsForm } from "~/components/servers/server-settings-form";
 import { ServerToggleButton } from "~/components/servers/server-toggle-button";
 import { ButtonStyles } from "~/components/ui/button";
 import { Icons } from "~/components/ui/icons";
@@ -11,11 +12,14 @@ import { Separator } from "~/components/ui/separator";
 import { Tabs } from "~/components/ui/tabs";
 import { queryClient } from "~/lib/tanstack-query/client";
 import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
+import { getSystemInfoQuery } from "~/lib/tanstack-query/queries/get-system-info";
 
 export const Route = createFileRoute("/servers/$name")({
   component: Component,
-  loader: ({ params }) =>
-    queryClient.ensureQueryData(getServerQuery(params.name)),
+  loader: async ({ params }) => {
+    await queryClient.ensureQueryData(getServerQuery(params.name));
+    await queryClient.ensureQueryData(getSystemInfoQuery);
+  },
 });
 
 function Component() {
@@ -57,6 +61,9 @@ function Component() {
         </div>
         <Tabs.Content value="dashboard">
           <ServerDashboard />
+        </Tabs.Content>
+        <Tabs.Content value="settings">
+          <ServerSettingsForm />
         </Tabs.Content>
       </Tabs>
     </main>

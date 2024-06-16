@@ -1,14 +1,14 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
-import { useActionState, useState } from "react";
+import { useActionState } from "react";
 import { toast } from "sonner";
+import { queryClient } from "~/lib/tanstack-query/client";
+import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
 import { startServer, stopServer } from "~/lib/tauri/commands";
 import { getServerPath } from "~/utils/get-server-path";
 import { Button } from "../ui/button";
 import { Icons } from "../ui/icons";
 import { Tooltip } from "../ui/tooltip";
-import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { queryClient } from "~/lib/tanstack-query/client";
 
 function toggleServerAction(name: string, isRunning: boolean) {
   return async (_: unknown) => {
@@ -21,8 +21,8 @@ function toggleServerAction(name: string, isRunning: boolean) {
     if (isRunning) {
       await stopServer(serverPath);
       await queryClient.invalidateQueries({
-        queryKey: getServerQuery(name).queryKey
-      })
+        queryKey: getServerQuery(name).queryKey,
+      });
 
       toast.success("Server stopped", {
         id: loading,
@@ -31,13 +31,10 @@ function toggleServerAction(name: string, isRunning: boolean) {
       return;
     }
 
-    await startServer({
-      serverPath,
-      ramAmount: "1024M",
-    });
+    await startServer(serverPath);
     await queryClient.invalidateQueries({
-      queryKey: getServerQuery(name).queryKey
-    })
+      queryKey: getServerQuery(name).queryKey,
+    });
 
     toast.success("Server started", {
       id: loading,
@@ -54,7 +51,7 @@ export function ServerToggleButton() {
 
   const [_, handleToggleServer, isPending] = useActionState(
     toggleServerAction(name, data.is_running),
-    null
+    null,
   );
 
   return (
@@ -62,11 +59,7 @@ export function ServerToggleButton() {
       <Tooltip.Provider>
         <Tooltip.Root>
           <Tooltip.Trigger asChild>
-            <Button
-              size="icon"
-              type="submit"
-              disabled={isPending}
-            >
+            <Button size="icon" type="submit" disabled={isPending}>
               <Icons.Play
                 data-visible={data.is_running}
                 className="absolute size-4 scale-100 transition-transform data-[visible='true']:scale-0"

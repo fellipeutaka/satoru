@@ -19,6 +19,8 @@ reqwest = "0.12.4"
 open = "5.1.4"
 once_cell = "1.19.0"
 command-group = "5.0.1"
+sysinfo = "0.30.12"
+regex = "1.10.5"
 
 [features]
 # This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!
