@@ -61,7 +61,7 @@ export function SelectScrollUpButton({
       )}
       {...props}
     >
-      {/* <ChevronUpIcon /> */}
+      <Icons.ChevronUp className="size-4" />
     </ScrollUpButton>
   );
 }
@@ -80,7 +80,7 @@ export function SelectScrollDownButton({
       )}
       {...props}
     >
-      {/* <ChevronDownIcon /> */}
+      <Icons.ChevronDown className="size-4" />
     </ScrollDownButton>
   );
 }
