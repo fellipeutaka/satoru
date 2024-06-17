@@ -1,7 +1,7 @@
 [package]
 name = "satoru"
 version = "0.0.0"
-description = "A Tauri App"
+description = "Satoru"
 authors = ["you"]
 edition = "2021"
 
@@ -21,6 +21,7 @@ once_cell = "1.19.0"
 command-group = "5.0.1"
 sysinfo = "0.30.12"
 regex = "1.10.5"
+ngrok = "0.13.1"
 
 [features]
 # This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!

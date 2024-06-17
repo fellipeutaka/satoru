@@ -1,14 +1,18 @@
 use command_group::CommandGroup;
+use ngrok::{config::TunnelBuilder, prelude::TunnelExt, tunnel::UrlTunnel};
 use std::{
+    io::{BufRead, BufReader},
     path::Path,
     process::{Command, Stdio},
     sync::Mutex,
+    thread,
 };
+use tauri::Manager;
 
 use crate::data::servers::{Server, SERVER_LIST};
 
 #[tauri::command]
-pub fn start_server(server_path: String) -> Result<(), String> {
+pub async fn start_server(app: tauri::AppHandle, server_path: String) -> Result<(), String> {
     let mut server_list = SERVER_LIST.lock().unwrap();
 
     let satoru_json_path = Path::new(&server_path).join("satoru.json");
@@ -32,8 +36,48 @@ pub fn start_server(server_path: String) -> Result<(), String> {
         .stdout(Stdio::piped())
         .group_spawn();
 
+    // let tunnel = ngrok::Session::builder()
+    //     .authtoken("")
+    //     .connect()
+    //     .await
+    //     .map_err(|e| e.to_string())?
+    //     .tcp_endpoint()
+    //     .listen()
+    //     .await;
+
+    // let mut unwrapped_tunnel = tunnel.unwrap();
+    // unwrapped_tunnel.forward_tcp("");
+    // let serverUrl = unwrapped_tunnel.url();
+    // println!("Server URL: {}", serverUrl);
+
     match command {
-        Ok(child) => {
+        Ok(mut child) => {
+            let stdout = child.inner().stdout.take();
+
+            if let Some(stdout) = stdout {
+                let reader = BufReader::new(stdout);
+                let app_clone = app.clone();
+                thread::spawn(move || {
+                    for line in reader.lines() {
+                        match line {
+                            Ok(line) => {
+                                #[derive(Clone, serde::Serialize)]
+                                struct ServerLogPayload {
+                                    message: String,
+                                }
+
+                                app_clone
+                                    .emit_all("server-logs", ServerLogPayload { message: line })
+                                    .unwrap();
+                            }
+                            Err(e) => {
+                                println!("Error: {}", e);
+                            }
+                        }
+                    }
+                });
+            }
+
             server_list.push(Server {
                 server_path: server_path.clone(),
                 child: Mutex::new(Some(child)),

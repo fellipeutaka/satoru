@@ -100,8 +100,8 @@ export function ServerSettingsForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit} className="space-y-8">
-        <Alert variant="warning" className="my-8">
+      <form onSubmit={handleSubmit} className="space-y-8 my-6">
+        <Alert variant="warning">
           <Icons.TriangleAlert className="size-4" />
           <Alert.Title>Warning</Alert.Title>
           <Alert.Description>

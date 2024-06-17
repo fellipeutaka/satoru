@@ -1,6 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { getServersQuery } from "~/lib/tanstack-query/queries/get-servers";
+import { cn } from "~/lib/utils";
 import { Badge } from "../ui/badge";
 import { ButtonStyles } from "../ui/button";
 import { Card } from "../ui/card";
@@ -8,7 +9,6 @@ import { Icons } from "../ui/icons";
 import { Separator } from "../ui/separator";
 import { NewServerDialog } from "./new-server-dialog";
 import { ServerListEmpty } from "./server-list-empty";
-import { cn } from "~/lib/utils";
 
 export function ServerList() {
   const { data: servers } = useSuspenseQuery(getServersQuery);
@@ -19,7 +19,7 @@ export function ServerList() {
   }
 
   return (
-    <div>
+    <section>
       <NewServerDialog />
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mt-6">
         {servers?.map((server) => (
@@ -31,11 +31,13 @@ export function ServerList() {
                   <div
                     className={cn(
                       "w-2 h-2 rounded-full mr-2",
-                      server.status === "Offline" ? "bg-red-500" : "bg-green-500",
+                      server.status === "Offline"
+                        ? "bg-red-500"
+                        : "bg-green-500",
                     )}
                     aria-hidden
                   />
-                  {server.status === 'Online' ? 'Online' : 'Offline'}
+                  {server.status === "Online" ? "Online" : "Offline"}
                 </Badge>
                 <Separator orientation="vertical" className="h-4" />
                 <Badge variant="secondary">{server.version}</Badge>
@@ -81,6 +83,6 @@ export function ServerList() {
           </Card>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

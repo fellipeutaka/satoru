@@ -3,6 +3,7 @@ import { Link, createFileRoute, useParams } from "@tanstack/react-router";
 import { Header } from "~/components/layout/header";
 import { ServerDashboard } from "~/components/servers/server-dashboard";
 import { ServerEulaPage } from "~/components/servers/server-eula-page";
+import { ServerLogs } from "~/components/servers/server-logs";
 import { ServerOpenFolderButton } from "~/components/servers/server-open-folder-button";
 import { ServerSettingsForm } from "~/components/servers/server-settings-form";
 import { ServerToggleButton } from "~/components/servers/server-toggle-button";
@@ -61,6 +62,9 @@ function Component() {
         </div>
         <Tabs.Content value="dashboard">
           <ServerDashboard />
+        </Tabs.Content>
+        <Tabs.Content value="logs">
+          <ServerLogs />
         </Tabs.Content>
         <Tabs.Content value="settings">
           <ServerSettingsForm />
