@@ -21,7 +21,7 @@ export function ServerList() {
   return (
     <section>
       <NewServerDialog />
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mt-6">
+      <div className="mt-6 grid gap-4 lg:grid-cols-3 md:grid-cols-2">
         {servers?.map((server) => (
           <Card key={server.id}>
             <Card.Header className="space-y-2">
@@ -30,21 +30,19 @@ export function ServerList() {
                 <Badge variant="outline">
                   <div
                     className={cn(
-                      "w-2 h-2 rounded-full mr-2",
-                      server.status === "Offline"
-                        ? "bg-red-500"
-                        : "bg-green-500",
+                      "mr-2 h-2 w-2 rounded-full",
+                      server.isRunning ? "bg-green-500" : "bg-red-500",
                     )}
                     aria-hidden
                   />
-                  {server.status === "Online" ? "Online" : "Offline"}
+                  {server.isRunning ? "Online" : "Offline"}
                 </Badge>
                 <Separator orientation="vertical" className="h-4" />
                 <Badge variant="secondary">{server.version}</Badge>
               </div>
               <div className="flex items-center gap-1">
                 <Icons.Users className="size-4" />
-                {server.onlinePlayers}
+                {server.isRunning ? server.onlinePlayers : "-"}
               </div>
             </Card.Header>
             <Card.Content>
@@ -62,7 +60,9 @@ export function ServerList() {
                 <div className="flex items-center justify-between">
                   <span>Players Online:</span>
                   <span>
-                    {server.onlinePlayers}/{server.maxPlayers}
+                    {server.isRunning
+                      ? `${server.onlinePlayers}/${server.maxPlayers}`
+                      : "-/-"}
                   </span>
                 </div>
               </div>

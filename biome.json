@@ -16,8 +16,17 @@
     "rules": {
       "all": true,
       "style": {
+        "all": true,
         "noImplicitBoolean": "off",
         "useNamingConvention": "off"
+      },
+      "nursery": {
+        "all": true,
+        "noReactSpecificProps": "off",
+        "noUndeclaredDependencies": "off",
+        "useImportExtensions": "off",
+        "useImportRestrictions": "off",
+        "noLabelWithoutControl": "off"
       }
     }
   },
@@ -41,6 +50,16 @@
         "rules": {
           "style": {
             "useFilenamingConvention": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["./src/components/ui/icons.tsx"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noSvgWithoutTitle": "off"
           }
         }
       }

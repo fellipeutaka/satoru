@@ -1,8 +1,8 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
-import { listen } from "@tauri-apps/api/event";
 import { useEffect, useRef, useState } from "react";
 import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
+import { listenToServerLogs } from "~/lib/tauri/events";
 import { Alert } from "../ui/alert";
 import { Icons } from "../ui/icons";
 import { Input } from "../ui/input";
@@ -16,10 +16,10 @@ export function ServerLogs() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const promise = listen<{ message: string }>("server-logs", (event) => {
+    const promise = listenToServerLogs((event) => {
       setLines((prev) => [...prev, event.payload.message]);
       containerRef.current?.scrollTo({
-        top: containerRef.current.scrollHeight,
+        top: containerRef.current.clientHeight,
         behavior: "smooth",
       });
     });
@@ -35,11 +35,11 @@ export function ServerLogs() {
         <>
           <div
             ref={containerRef}
-            className="h-72 overflow-y-auto w-full rounded-md border"
+            className="h-72 w-full overflow-y-auto rounded-md border"
           >
-            <div className="p-4 space-y-4 text-sm *:leading-7">
+            <div className="space-y-4 p-4 text-sm *:leading-7">
               {lines?.map((line, index) => (
-                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                // biome-ignore lint/suspicious/noArrayIndexKey:
                 <p key={index}>{line}</p>
               ))}
             </div>

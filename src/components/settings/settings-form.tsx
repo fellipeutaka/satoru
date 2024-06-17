@@ -48,7 +48,7 @@ export function SettingsForm() {
           disabled={form.formState.isSubmitting || !form.formState.isDirty}
         >
           {form.formState.isSubmitting && (
-            <Icons.Loader className="animate-spin size-4 mr-2" />
+            <Icons.Loader className="mr-2 size-4 animate-spin" />
           )}
           Update settings
         </Button>

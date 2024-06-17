@@ -8,7 +8,7 @@ export function NewServerDialog() {
     <Dialog>
       <Dialog.Trigger asChild>
         <Button variant="outline">
-          <Icons.Plus className="size-4 mr-2" />
+          <Icons.Plus className="mr-2 size-4" />
           Add a server
         </Button>
       </Dialog.Trigger>

@@ -6,8 +6,8 @@ interface HeaderProps {
 export function Header(props: HeaderProps) {
   return (
     <header>
-      <h1 className="text-lg font-medium">{props.title}</h1>
-      <h2 className="text-sm text-muted-foreground">{props.description}</h2>
+      <h1 className="font-medium text-lg">{props.title}</h1>
+      <h2 className="text-muted-foreground text-sm">{props.description}</h2>
     </header>
   );
 }

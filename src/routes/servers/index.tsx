@@ -33,7 +33,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   const router = useRouter();
 
   return (
-    <main className="shell justify-center items-center">
+    <main className="shell items-center justify-center">
       <h1 className="font-medium text-2xl">Something went wrong!</h1>
       <p className="max-w-sm whitespace-pre-line text-pretty text-sm">
         {error.message}

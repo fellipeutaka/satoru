@@ -19,7 +19,7 @@ export function SettingsNgrokField() {
           <div className={InputStyles({ className: "gap-2 pl-0" })}>
             <Form.Control>
               <input
-                className="flex-1 bg-transparent outline-none pl-3"
+                className="flex-1 bg-transparent pl-3 outline-none"
                 type={isVisible ? "text" : "password"}
                 placeholder="Ngrok token"
                 {...field}

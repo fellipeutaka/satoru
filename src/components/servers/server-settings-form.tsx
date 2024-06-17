@@ -100,7 +100,7 @@ export function ServerSettingsForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit} className="space-y-8 my-6">
+      <form onSubmit={handleSubmit} className="my-6 space-y-8">
         <Alert variant="warning">
           <Icons.TriangleAlert className="size-4" />
           <Alert.Title>Warning</Alert.Title>
@@ -332,7 +332,7 @@ export function ServerSettingsForm() {
           disabled={form.formState.isSubmitting || !form.formState.isDirty}
         >
           {form.formState.isSubmitting && (
-            <Icons.Loader className="animate-spin size-4 mr-2" />
+            <Icons.Loader className="mr-2 size-4 animate-spin" />
           )}
           Update settings
         </Button>

@@ -55,7 +55,7 @@ export function EulaForm() {
 
   return (
     <Form {...form}>
-      <form className="space-y-6 my-6" onSubmit={handleSubmit}>
+      <form className="my-6 space-y-6" onSubmit={handleSubmit}>
         <Form.Field
           control={form.control}
           name="accepted"
@@ -84,7 +84,7 @@ export function EulaForm() {
 
         <Button type="submit" disabled={form.formState.isSubmitting}>
           {form.formState.isSubmitting && (
-            <Icons.Loader className="animate-spin size-4 mr-2" />
+            <Icons.Loader className="mr-2 size-4 animate-spin" />
           )}
           Continue
         </Button>

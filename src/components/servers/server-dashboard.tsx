@@ -14,7 +14,7 @@ export function ServerDashboard() {
   const { data: server } = useSuspenseQuery(getServerQuery(name));
 
   return (
-    <div className="grid gap-4 lg:grid-cols-3 sm:grid-cols-2 flex-1 my-6">
+    <div className="my-6 grid flex-1 gap-4 lg:grid-cols-3 sm:grid-cols-2">
       <Card>
         <Card.Header className="flex-row items-center justify-between">
           <Card.Title className="font-semibold text-base">

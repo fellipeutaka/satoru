@@ -16,7 +16,7 @@ export function ServerEulaPage() {
       <Separator />
       <div>
         <Link to="/servers" className={ButtonStyles({ variant: "outline" })}>
-          <Icons.ChevronLeft className="size-4 mr-2" />
+          <Icons.ChevronLeft className="mr-2 size-4" />
           Back to Servers
         </Link>
       </div>

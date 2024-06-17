@@ -31,7 +31,7 @@ export function NewServerFormVersionField() {
               <Form.Control>
                 <Button
                   className={cn(
-                    "flex w-full justify-between font-normal group",
+                    "group flex w-full justify-between font-normal",
                     !field.value && "text-muted-foreground",
                   )}
                   variant="outline"
@@ -58,8 +58,8 @@ export function NewServerFormVersionField() {
                 />
                 <Command.Empty>
                   {isLoading ? (
-                    <div className="flex justify-center items-center gap-2">
-                      <Icons.Loader className="animate-spin size-4" />
+                    <div className="flex items-center justify-center gap-2">
+                      <Icons.Loader className="size-4 animate-spin" />
                       Fetching versions...
                     </div>
                   ) : isError ? (

@@ -42,12 +42,12 @@ function Component() {
       <Separator />
       <div>
         <Link to="/servers" className={ButtonStyles({ variant: "outline" })}>
-          <Icons.ChevronLeft className="size-4 mr-2" />
+          <Icons.ChevronLeft className="mr-2 size-4" />
           Back to Servers
         </Link>
       </div>
       <Tabs defaultValue="dashboard">
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <Tabs.List>
             <Tabs.Trigger value="dashboard">Dashboard</Tabs.Trigger>
             <Tabs.Trigger value="plugins">Plugins</Tabs.Trigger>

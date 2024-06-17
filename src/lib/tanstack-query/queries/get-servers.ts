@@ -16,7 +16,7 @@ export const getServersQuery = queryOptions({
       onlinePlayers: 12,
       version: server.version,
       ip: "mc.example.com",
-      status: server.is_running ? "Online": "Offline",
+      isRunning: server.is_running,
       createdAt: new Date(),
     }));
   },

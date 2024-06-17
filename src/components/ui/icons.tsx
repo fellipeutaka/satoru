@@ -5,8 +5,6 @@ export type IconComponent = (props: IconProps) => React.ReactElement;
 const SocialIcons = {
   GitHub: (props) => (
     <svg
-      role="img"
-      aria-label="GitHub"
       width={15}
       height={15}
       viewBox="0 0 15 15"
@@ -28,8 +26,6 @@ export const Icons = {
   ...SocialIcons,
   Loader: (props) => (
     <svg
-      role="img"
-      aria-label="Loader"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -46,8 +42,6 @@ export const Icons = {
   ),
   DotFilled: (props) => (
     <svg
-      role="img"
-      aria-label="Dot Filled"
       width={15}
       height={15}
       viewBox="0 0 15 15"
@@ -63,8 +57,6 @@ export const Icons = {
   ),
   Eye: (props) => (
     <svg
-      role="img"
-      aria-label="Eye"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -82,8 +74,6 @@ export const Icons = {
   ),
   EyeOff: (props) => (
     <svg
-      role="img"
-      aria-label="Eye Off"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -102,8 +92,6 @@ export const Icons = {
   ),
   X: (props) => (
     <svg
-      role="img"
-      aria-label="X"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -120,8 +108,6 @@ export const Icons = {
   ),
   Search: (props) => (
     <svg
-      role="img"
-      aria-label="Search"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -139,8 +125,6 @@ export const Icons = {
   ),
   Check: (props) => (
     <svg
-      role="img"
-      aria-label="Check"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -157,8 +141,6 @@ export const Icons = {
   ),
   TriangleAlert: (props) => (
     <svg
-      role="img"
-      aria-label="Alert"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -175,8 +157,6 @@ export const Icons = {
   ),
   ChevronDown: (props) => (
     <svg
-      role="img"
-      aria-label="Chevron Down"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -193,8 +173,6 @@ export const Icons = {
   ),
   ChevronLeft: (props) => (
     <svg
-      role="img"
-      aria-label="Chevron Left"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -211,8 +189,6 @@ export const Icons = {
   ),
   ChevronRight: (props) => (
     <svg
-      role="img"
-      aria-label="Chevron Right"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -229,8 +205,6 @@ export const Icons = {
   ),
   Users: (props) => (
     <svg
-      role="img"
-      aria-label="Users"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -249,8 +223,6 @@ export const Icons = {
   ),
   Plus: (props) => (
     <svg
-      role="img"
-      aria-label="Plus"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -267,8 +239,6 @@ export const Icons = {
   ),
   Play: (props) => (
     <svg
-      role="img"
-      aria-label="Play"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -285,8 +255,6 @@ export const Icons = {
   ),
   Pause: (props) => (
     <svg
-      role="img"
-      aria-label="Pause"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -304,8 +272,6 @@ export const Icons = {
   ),
   FolderOpen: (props) => (
     <svg
-      role="img"
-      aria-label="Folder Open"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -322,8 +288,6 @@ export const Icons = {
   ),
   Clock: (props) => (
     <svg
-      role="img"
-      aria-label="Clock"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -341,8 +305,6 @@ export const Icons = {
   ),
   Cpu: (props) => (
     <svg
-      role="img"
-      aria-label="CPU"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -361,8 +323,6 @@ export const Icons = {
   ),
   MemoryStick: (props) => (
     <svg
-      role="img"
-      aria-label="Memory Stick"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -379,8 +339,6 @@ export const Icons = {
   ),
   HardDrive: (props) => (
     <svg
-      role="img"
-      aria-label="Hard Drive"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -400,8 +358,6 @@ export const Icons = {
   ),
   Network: (props) => (
     <svg
-      role="img"
-      aria-label="Network"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -421,8 +377,6 @@ export const Icons = {
   ),
   Server: (props) => (
     <svg
-      role="img"
-      aria-label="Server"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}
@@ -442,8 +396,6 @@ export const Icons = {
   ),
   Settings: (props) => (
     <svg
-      role="img"
-      aria-label="Settings"
       xmlns="http://www.w3.org/2000/svg"
       width={24}
       height={24}

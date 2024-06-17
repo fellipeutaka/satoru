@@ -79,17 +79,13 @@ function FormItem({ ref, className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function FormLabel({ ref, className, ...props }: Omit<LabelProps, "htmlFor">) {
+function FormLabel({ ref, ...props }: Omit<LabelProps, "htmlFor">) {
   const { formItemId } = useFormField();
 
   return <Label ref={ref} {...props} htmlFor={formItemId} />;
 }
 
-function FormControl({
-  ref,
-  className,
-  ...props
-}: React.ComponentProps<typeof Slot>) {
+function FormControl({ ref, ...props }: React.ComponentProps<typeof Slot>) {
   const { error, formItemId, formDescriptionId, formMessageId } =
     useFormField();
 
@@ -117,7 +113,7 @@ function FormDescription({
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn("text-sm text-muted-foreground", className)}
+      className={cn("text-muted-foreground text-sm", className)}
       {...props}
     />
   );
@@ -140,7 +136,7 @@ function FormMessage({
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-sm font-medium text-destructive", className)}
+      className={cn("font-medium text-destructive text-sm", className)}
       {...props}
     >
       {body}

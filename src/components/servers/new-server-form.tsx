@@ -54,8 +54,7 @@ export function NewServerForm() {
           name: values.name,
         },
       });
-    } catch (err) {
-      console.error(err);
+    } catch (_err) {
       toast.error("Failed to create server.", {
         id: loading,
       });
@@ -100,7 +99,7 @@ export function NewServerForm() {
           </Dialog.Close>
           <Button type="submit" disabled={form.formState.isSubmitting}>
             {form.formState.isSubmitting && (
-              <Icons.Loader className="animate-spin size-4 mr-2" />
+              <Icons.Loader className="mr-2 size-4 animate-spin" />
             )}
             Create Server
           </Button>
