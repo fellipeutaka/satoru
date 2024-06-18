@@ -1,5 +1,4 @@
 use command_group::CommandGroup;
-use ngrok::tunnel::EndpointInfo;
 use std::{
     io::{BufRead, BufReader},
     path::Path,
@@ -48,27 +47,18 @@ pub async fn start_server(
 
     let tcp_tunnel = run_ngrok(ngrok_token, server_properties.server_port).await;
 
-    println!("{}", tcp_tunnel.url());
-
     match command {
         Ok(mut child) => {
             let stdout = child.inner().stdout.take();
 
             if let Some(stdout) = stdout {
                 let reader = BufReader::new(stdout);
-                let app_clone = app.clone();
+
                 thread::spawn(move || {
                     for line in reader.lines() {
                         match line {
                             Ok(line) => {
-                                #[derive(Clone, serde::Serialize)]
-                                struct ServerLogPayload {
-                                    message: String,
-                                }
-
-                                app_clone
-                                    .emit_all("server-logs", ServerLogPayload { message: line })
-                                    .unwrap();
+                                app.emit_all("server-logs", line).unwrap();
                             }
                             Err(e) => {
                                 println!("Error: {}", e);
@@ -79,7 +69,7 @@ pub async fn start_server(
             }
 
             server_list.push(Server {
-                server_path: server_path.clone(),
+                server_path,
                 child: Mutex::new(Some(child)),
                 tcp_tunnel: Mutex::new(tcp_tunnel),
             });

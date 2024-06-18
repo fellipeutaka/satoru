@@ -1,13 +1,9 @@
 import { type Event, listen } from "@tauri-apps/api/event";
 
-interface ServerLogs {
-  message: string;
-}
-
 export async function listenToServerLogs(
-  callback: (event: Event<ServerLogs>) => void,
+  callback: (event: Event<string>) => void,
 ) {
-  const promise = await listen<ServerLogs>("server-logs", callback);
+  const promise = await listen<string>("server-logs", callback);
 
   return promise;
 }

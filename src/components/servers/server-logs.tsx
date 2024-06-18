@@ -17,7 +17,7 @@ export function ServerLogs() {
 
   useEffect(() => {
     const promise = listenToServerLogs((event) => {
-      setLines((prev) => [...prev, event.payload.message]);
+      setLines((prev) => [...prev, event.payload]);
       containerRef.current?.scrollTo({
         top: containerRef.current.scrollHeight,
         behavior: "smooth",
@@ -35,14 +35,12 @@ export function ServerLogs() {
         <>
           <div
             ref={containerRef}
-            className="h-72 w-full overflow-y-auto rounded-md border"
+            className="flex h-72 w-full flex-col gap-4 overflow-y-auto rounded-md border p-4 font-mono text-sm *:leading-7"
           >
-            <div className="space-y-4 p-4 text-sm *:leading-7">
-              {lines?.map((line, index) => (
-                // biome-ignore lint/suspicious/noArrayIndexKey:
-                <p key={index}>{line}</p>
-              ))}
-            </div>
+            {lines?.map((line, index) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey:
+              <p key={index}>{line}</p>
+            ))}
           </div>
           <Input className="mt-4" placeholder="Enter a command..." />
         </>
