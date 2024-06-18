@@ -2,6 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute, useParams } from "@tanstack/react-router";
 import { Header } from "~/components/layout/header";
 import { ServerDashboard } from "~/components/servers/server-dashboard";
+import { ServerDeleteButton } from "~/components/servers/server-delete-button";
 import { ServerEulaPage } from "~/components/servers/server-eula-page";
 import { ServerLogs } from "~/components/servers/server-logs";
 import { ServerOpenFolderButton } from "~/components/servers/server-open-folder-button";
@@ -58,6 +59,7 @@ function Component() {
           <div className="flex items-center gap-4">
             <ServerToggleButton />
             <ServerOpenFolderButton />
+            <ServerDeleteButton />
           </div>
         </div>
         <Tabs.Content value="dashboard">

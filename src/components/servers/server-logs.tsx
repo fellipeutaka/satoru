@@ -19,7 +19,7 @@ export function ServerLogs() {
     const promise = listenToServerLogs((event) => {
       setLines((prev) => [...prev, event.payload.message]);
       containerRef.current?.scrollTo({
-        top: containerRef.current.clientHeight,
+        top: containerRef.current.scrollHeight,
         behavior: "smooth",
       });
     });

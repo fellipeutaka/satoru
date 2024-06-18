@@ -28,9 +28,11 @@ export const ButtonStyles = tv({
   },
 });
 
+export type ButtonVariants = VariantProps<typeof ButtonStyles>;
+
 export interface ButtonProps
   extends React.ComponentPropsWithRef<"button">,
-    VariantProps<typeof ButtonStyles> {}
+    ButtonVariants {}
 
 export function Button({
   ref,

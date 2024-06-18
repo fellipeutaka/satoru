@@ -17,7 +17,7 @@ export const getServersQuery = queryOptions({
       version: server.version,
       ip: "mc.example.com",
       isRunning: server.is_running,
-      createdAt: new Date(),
+      createdAt: new Date(server.created_at),
     }));
   },
   throwOnError: true,

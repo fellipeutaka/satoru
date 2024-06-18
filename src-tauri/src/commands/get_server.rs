@@ -28,6 +28,10 @@ pub fn get_server(props: GetServerProps) -> Result<GetServerResponse, String> {
 
     let server_path = Path::new(&props.server_dir).join(&props.name);
 
+    if !server_path.exists() {
+        return Err("Server does not exist".to_string());
+    }
+
     let eula_path = server_path.join("eula.txt");
     let eula = std::fs::read_to_string(eula_path).unwrap_or("eula=false".to_string());
     let eula_accepted = eula.contains("eula=true");

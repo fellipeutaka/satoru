@@ -11,6 +11,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.6.0
         version: 3.6.0(react-hook-form@7.52.0(react@19.0.0-rc-fb9a90fa48-20240614))
+      '@radix-ui/react-alert-dialog':
+        specifier: next
+        version: 1.1.0-rc.7(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614)
       '@radix-ui/react-checkbox':
         specifier: next
         version: 1.1.0-rc.6(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614)
@@ -547,6 +550,19 @@ packages:
 
   '@radix-ui/primitive@1.1.0-rc.6':
     resolution: {integrity: sha512-npVN3RUkSsu6r91nv4k423oo1tYkWo759rezA3EUrpDr+kFJaQ8u7AwtDpY1yZrllcPygx72mN3O8CAnV+Rpxw==}
+
+  '@radix-ui/react-alert-dialog@1.1.0-rc.7':
+    resolution: {integrity: sha512-iP08/GV1vXOeTWL0KgD5L2+NQ5o/QoTncVZsoql9El+/adW+/JX5xms7itfclkq0+QtG0EzHw0ukV4yXJJIxoQ==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
 
   '@radix-ui/react-arrow@1.1.0-rc.6':
     resolution: {integrity: sha512-poFDb4dwgRvmSisxXEWGJW+rUexn3LhI+eV05CmuiGjAAz0LkvhmbtFpMSzhdcF/+KiClj3KDQgRnm0kRYr+VQ==}
@@ -2427,6 +2443,20 @@ snapshots:
       '@babel/runtime': 7.24.7
 
   '@radix-ui/primitive@1.1.0-rc.6': {}
+
+  '@radix-ui/react-alert-dialog@1.1.0-rc.7(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614)':
+    dependencies:
+      '@radix-ui/primitive': 1.1.0-rc.6
+      '@radix-ui/react-compose-refs': 1.1.0-rc.6(@types/react@18.3.3)(react@19.0.0-rc-fb9a90fa48-20240614)
+      '@radix-ui/react-context': 1.1.0-rc.6(@types/react@18.3.3)(react@19.0.0-rc-fb9a90fa48-20240614)
+      '@radix-ui/react-dialog': 1.1.0-rc.8(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614)
+      '@radix-ui/react-primitive': 2.0.0-rc.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614)
+      '@radix-ui/react-slot': 1.1.0-rc.6(@types/react@18.3.3)(react@19.0.0-rc-fb9a90fa48-20240614)
+      react: 19.0.0-rc-fb9a90fa48-20240614
+      react-dom: 19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614)
+    optionalDependencies:
+      '@types/react': 18.3.3
+      '@types/react-dom': 18.3.0
 
   '@radix-ui/react-arrow@1.1.0-rc.6(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614)':
     dependencies:

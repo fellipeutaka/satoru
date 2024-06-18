@@ -54,7 +54,7 @@ export function ServerList() {
                 <Separator />
                 <div className="flex items-center justify-between">
                   <span>IP Address:</span>
-                  <span>{server.ip}</span>
+                  <span>{server.isRunning ? server.ip : "-"}</span>
                 </div>
                 <Separator />
                 <div className="flex items-center justify-between">

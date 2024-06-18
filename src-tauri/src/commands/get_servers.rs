@@ -1,3 +1,4 @@
+use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
 use crate::data::servers::SERVER_LIST;
@@ -8,6 +9,7 @@ pub struct Server {
     path: String,
     is_running: bool,
     version: String,
+    created_at: String,
 }
 
 #[tauri::command]
@@ -29,10 +31,11 @@ pub fn get_servers(server_folder: String) -> Result<Vec<Server>, String> {
                             let satoru_json = std::fs::read_to_string(server_props_path).unwrap();
                             let server_props: serde_json::Value =
                                 serde_json::from_str(&satoru_json).unwrap();
-                            let version = server_props["version"]
-                                .as_str()
-                                .unwrap_or("1.16.5")
-                                .to_string();
+                            let version = server_props["version"].as_str().unwrap().to_string();
+
+                            let created_date: DateTime<Utc> =
+                                DateTime::from(path.metadata().unwrap().created().unwrap());
+                            let created_at = created_date.to_rfc3339();
 
                             servers.push(Server {
                                 name: path.file_name().unwrap().to_str().unwrap().to_string(),
@@ -41,6 +44,7 @@ pub fn get_servers(server_folder: String) -> Result<Vec<Server>, String> {
                                 is_running: server_list.iter().any(|server| {
                                     server.server_path == path.to_str().unwrap().to_string()
                                 }),
+                                created_at,
                             });
                         }
                     }

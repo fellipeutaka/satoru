@@ -23,7 +23,9 @@ export function ServerDashboard() {
           <Icons.Users className="size-4" />
         </Card.Header>
         <Card.Content>
-          <span className="font-bold text-2xl tracking-tight">42</span>
+          <span className="font-bold text-2xl tracking-tight">
+            {server.is_running ? 43 : "-"}
+          </span>
           <p className="text-muted-foreground text-xs">
             {server.is_running ? "Online" : "Offline"} /{" "}
             {server.server_properties.max_players} max
@@ -37,7 +39,9 @@ export function ServerDashboard() {
           <Icons.Clock className="size-4" />
         </Card.Header>
         <Card.Content>
-          <span className="font-bold text-2xl tracking-tight">7d 12h 34m</span>
+          <span className="font-bold text-2xl tracking-tight">
+            {server.is_running ? "7d 12h 34m" : "-"}
+          </span>
           <p className="text-muted-foreground text-xs">Continuously running</p>
         </Card.Content>
       </Card>
@@ -48,7 +52,9 @@ export function ServerDashboard() {
           <Icons.Cpu className="size-4" />
         </Card.Header>
         <Card.Content>
-          <span className="font-bold text-2xl tracking-tight">68%</span>
+          <span className="font-bold text-2xl tracking-tight">
+            {server.is_running ? "68%" : "-"}
+          </span>
           <p className="text-muted-foreground text-xs">of 8 cores</p>
         </Card.Content>
       </Card>
@@ -62,7 +68,7 @@ export function ServerDashboard() {
         </Card.Header>
         <Card.Content>
           <span className="font-bold text-2xl tracking-tight">
-            {systemInfo.memoryUsed} GB
+            {server.is_running ? `${systemInfo.memoryUsed} GB` : "-"}
           </span>
           <p className="text-muted-foreground text-xs">
             of {systemInfo.memoryTotal} GB total
@@ -78,7 +84,9 @@ export function ServerDashboard() {
           <Icons.HardDrive className="size-4" />
         </Card.Header>
         <Card.Content>
-          <span className="font-bold text-2xl tracking-tight">85 GB</span>
+          <span className="font-bold text-2xl tracking-tight">
+            {server.is_running ? "8 GB" : "-"}
+          </span>
           <p className="text-muted-foreground text-xs">of 500 GB total</p>
         </Card.Content>
       </Card>
@@ -91,7 +99,9 @@ export function ServerDashboard() {
           <Icons.Network className="size-4" />
         </Card.Header>
         <Card.Content>
-          <span className="font-bold text-2xl tracking-tight">125 Mbps</span>
+          <span className="font-bold text-2xl tracking-tight">
+            {server.is_running ? "125 Mbps" : "-"}
+          </span>
           <p className="text-muted-foreground text-xs">
             Inbound / 75 Mbps Outbound
           </p>

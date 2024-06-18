@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
+    "@radix-ui/react-alert-dialog": "next",
     "@radix-ui/react-checkbox": "next",
     "@radix-ui/react-context-menu": "next",
     "@radix-ui/react-dialog": "next",

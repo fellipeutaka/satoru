@@ -22,6 +22,7 @@ command-group = "5.0.1"
 sysinfo = "0.30.12"
 regex = "1.10.5"
 ngrok = "0.13.1"
+chrono = "0.4.38"
 
 [features]
 # This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!

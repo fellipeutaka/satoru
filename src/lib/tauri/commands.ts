@@ -6,6 +6,7 @@ interface Server {
   name: string;
   path: string;
   version: string;
+  created_at: string;
 }
 
 export async function getServers(serverFolder: string) {
@@ -146,7 +147,18 @@ export async function stopServer(serverPath: string) {
     if (typeof err === "string") {
       throw new Error(err);
     }
-    throw new Error("Failed to run server");
+    throw new Error("Failed to stop server");
+  }
+}
+
+export async function deleteServer(serverPath: string) {
+  try {
+    await invoke<GetServerResponse>("delete_server", { serverPath });
+  } catch (err) {
+    if (typeof err === "string") {
+      throw new Error(err);
+    }
+    throw new Error("Failed to delete server");
   }
 }
 
