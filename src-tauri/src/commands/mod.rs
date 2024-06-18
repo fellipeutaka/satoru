@@ -4,7 +4,6 @@ pub mod delete_server;
 pub mod download_spigot;
 pub mod get_java_version;
 pub mod get_server;
-pub mod get_server_status;
 pub mod get_servers;
 pub mod get_system_info;
 pub mod open_folder;

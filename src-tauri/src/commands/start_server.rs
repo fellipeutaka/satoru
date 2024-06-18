@@ -1,21 +1,29 @@
 use command_group::CommandGroup;
-use ngrok::{config::TunnelBuilder, prelude::TunnelExt, tunnel::UrlTunnel};
+use ngrok::tunnel::EndpointInfo;
 use std::{
     io::{BufRead, BufReader},
     path::Path,
     process::{Command, Stdio},
-    sync::Mutex,
     thread,
 };
 use tauri::Manager;
+use tokio::sync::Mutex;
 
-use crate::data::servers::{Server, SERVER_LIST};
+use crate::{
+    data::servers::{Server, SERVER_LIST},
+    utils::{get_server_properties::get_server_properties, run_ngrok::run_ngrok},
+};
 
 #[tauri::command]
-pub async fn start_server(app: tauri::AppHandle, server_path: String) -> Result<(), String> {
-    let mut server_list = SERVER_LIST.lock().unwrap();
+pub async fn start_server(
+    app: tauri::AppHandle,
+    ngrok_token: String,
+    server_path: String,
+) -> Result<(), String> {
+    let mut server_list = SERVER_LIST.lock().await;
 
-    let satoru_json_path = Path::new(&server_path).join("satoru.json");
+    let server_path_buf = Path::new(&server_path);
+    let satoru_json_path = server_path_buf.join("satoru.json");
     let satoru_json = std::fs::read_to_string(satoru_json_path).unwrap();
     let server_props: serde_json::Value = serde_json::from_str(&satoru_json).unwrap();
     let ram = server_props["ram_amount"]
@@ -36,19 +44,11 @@ pub async fn start_server(app: tauri::AppHandle, server_path: String) -> Result<
         .stdout(Stdio::piped())
         .group_spawn();
 
-    // let tunnel = ngrok::Session::builder()
-    //     .authtoken("")
-    //     .connect()
-    //     .await
-    //     .map_err(|e| e.to_string())?
-    //     .tcp_endpoint()
-    //     .listen()
-    //     .await;
+    let server_properties = get_server_properties(server_path_buf.to_path_buf());
 
-    // let mut unwrapped_tunnel = tunnel.unwrap();
-    // unwrapped_tunnel.forward_tcp("");
-    // let serverUrl = unwrapped_tunnel.url();
-    // println!("Server URL: {}", serverUrl);
+    let tcp_tunnel = run_ngrok(ngrok_token, server_properties.server_port).await;
+
+    println!("{}", tcp_tunnel.url());
 
     match command {
         Ok(mut child) => {
@@ -81,6 +81,7 @@ pub async fn start_server(app: tauri::AppHandle, server_path: String) -> Result<
             server_list.push(Server {
                 server_path: server_path.clone(),
                 child: Mutex::new(Some(child)),
+                tcp_tunnel: Mutex::new(tcp_tunnel),
             });
 
             Ok(())

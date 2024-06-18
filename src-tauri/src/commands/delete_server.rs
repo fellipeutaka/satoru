@@ -4,7 +4,7 @@ use super::stop_server::stop_server;
 
 #[tauri::command]
 pub async fn delete_server(server_path: String) -> Result<(), String> {
-    stop_server(server_path.clone());
+    stop_server(server_path.clone()).await;
 
     match fs::remove_dir_all(server_path) {
         Ok(_) => Ok(()),

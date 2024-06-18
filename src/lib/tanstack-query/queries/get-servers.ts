@@ -15,7 +15,7 @@ export const getServersQuery = queryOptions({
       maxPlayers: 100,
       onlinePlayers: 12,
       version: server.version,
-      ip: "mc.example.com",
+      ip: server.ip,
       isRunning: server.is_running,
       createdAt: new Date(server.created_at),
     }));

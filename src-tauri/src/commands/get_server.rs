@@ -23,8 +23,8 @@ pub struct GetServerResponse {
 }
 
 #[tauri::command]
-pub fn get_server(props: GetServerProps) -> Result<GetServerResponse, String> {
-    let server_list = SERVER_LIST.lock().unwrap();
+pub async fn get_server(props: GetServerProps) -> Result<GetServerResponse, String> {
+    let server_list = SERVER_LIST.lock().await;
 
     let server_path = Path::new(&props.server_dir).join(&props.name);
 

@@ -7,6 +7,7 @@ interface Server {
   path: string;
   version: string;
   created_at: string;
+  ip: string;
 }
 
 export async function getServers(serverFolder: string) {
@@ -129,9 +130,14 @@ export async function openFolder(path: string) {
   await invoke("open_folder", { path });
 }
 
-export async function startServer(serverPath: string) {
+interface StartServerProps {
+  serverPath: string;
+  ngrokToken: string;
+}
+
+export async function startServer(props: StartServerProps) {
   try {
-    await invoke<GetServerResponse>("start_server", { serverPath });
+    await invoke<GetServerResponse>("start_server", { ...props });
   } catch (err) {
     if (typeof err === "string") {
       throw new Error(err);

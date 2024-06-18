@@ -1,4 +1,5 @@
 use chrono::{DateTime, Utc};
+use ngrok::tunnel::EndpointInfo;
 use serde::{Deserialize, Serialize};
 
 use crate::data::servers::SERVER_LIST;
@@ -10,12 +11,13 @@ pub struct Server {
     is_running: bool,
     version: String,
     created_at: String,
+    ip: String,
 }
 
 #[tauri::command]
-pub fn get_servers(server_folder: String) -> Result<Vec<Server>, String> {
+pub async fn get_servers(server_folder: String) -> Result<Vec<Server>, String> {
     let entries = std::fs::read_dir(server_folder);
-    let server_list = SERVER_LIST.lock().unwrap();
+    let server_list = SERVER_LIST.lock().await;
 
     match entries {
         Ok(entries) => {
@@ -37,14 +39,33 @@ pub fn get_servers(server_folder: String) -> Result<Vec<Server>, String> {
                                 DateTime::from(path.metadata().unwrap().created().unwrap());
                             let created_at = created_date.to_rfc3339();
 
+                            let server_path = path.to_str().unwrap().to_string();
+
+                            let server = server_list
+                                .iter()
+                                .find(|server| server.server_path == server_path);
+
+                            let ip = if let Some(server) = server {
+                                server
+                                    .tcp_tunnel
+                                    .lock()
+                                    .await
+                                    .url()
+                                    .to_string()
+                                    .replace("tcp://", "")
+                            } else {
+                                "".to_string()
+                            };
+
                             servers.push(Server {
                                 name: path.file_name().unwrap().to_str().unwrap().to_string(),
-                                path: path.to_str().unwrap().to_string(),
+                                path: server_path.clone(),
                                 version,
-                                is_running: server_list.iter().any(|server| {
-                                    server.server_path == path.to_str().unwrap().to_string()
-                                }),
+                                is_running: server_list
+                                    .iter()
+                                    .any(|server| server.server_path == server_path),
                                 created_at,
+                                ip: ip.to_string(),
                             });
                         }
                     }

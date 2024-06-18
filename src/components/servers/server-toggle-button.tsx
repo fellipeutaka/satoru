@@ -1,18 +1,20 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
+import { join } from "@tauri-apps/api/path";
 import { useActionState } from "react";
 import { toast } from "sonner";
 import { queryClient } from "~/lib/tanstack-query/client";
 import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
 import { startServer, stopServer } from "~/lib/tauri/commands";
-import { getServerPath } from "~/utils/get-server-path";
+import { getSettings } from "~/utils/get-settings";
 import { Button } from "../ui/button";
 import { Icons } from "../ui/icons";
 import { Tooltip } from "../ui/tooltip";
 
 function toggleServerAction(name: string, isRunning: boolean) {
   return async (_: unknown) => {
-    const serverPath = await getServerPath(name);
+    const { serverFolder, ngrokToken } = await getSettings();
+    const serverPath = await join(serverFolder, name);
 
     const loading = toast.loading(
       isRunning ? "Stopping server..." : "Starting server...",
@@ -31,7 +33,10 @@ function toggleServerAction(name: string, isRunning: boolean) {
       return;
     }
 
-    await startServer(serverPath);
+    await startServer({
+      serverPath,
+      ngrokToken,
+    });
     await queryClient.invalidateQueries({
       queryKey: getServerQuery(name).queryKey,
     });

@@ -7,8 +7,7 @@ mod utils;
 use commands::{
     accept_terms::accept_terms, create_server::create_server, delete_server::delete_server,
     download_spigot::download_spigot, get_java_version::get_java_version, get_server::get_server,
-    get_server_status::get_server_status, get_servers::get_servers,
-    get_system_info::get_system_info, open_folder::open_folder,
+    get_servers::get_servers, get_system_info::get_system_info, open_folder::open_folder,
     save_server_settings::save_server_settings, start_server::start_server,
     stop_server::stop_server,
 };
@@ -22,7 +21,6 @@ fn main() {
             delete_server,
             download_spigot,
             get_java_version,
-            get_server_status,
             get_server,
             get_servers,
             get_system_info,
