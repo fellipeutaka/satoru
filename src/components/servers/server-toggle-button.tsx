@@ -69,7 +69,7 @@ export function ServerToggleButton() {
                 data-visible={data.is_running}
                 className="absolute size-4 scale-100 transition-transform data-[visible='true']:scale-0"
               />
-              <Icons.Pause
+              <Icons.Ban
                 data-visible={data.is_running}
                 className="size-4 transition-transform data-[visible='false']:scale-0"
               />

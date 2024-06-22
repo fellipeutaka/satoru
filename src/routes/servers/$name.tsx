@@ -47,7 +47,7 @@ function Component() {
           Back to Servers
         </Link>
       </div>
-      <Tabs defaultValue="dashboard">
+      <Tabs className="flex flex-1 flex-col" defaultValue="dashboard">
         <div className="flex items-center justify-between">
           <Tabs.List>
             <Tabs.Trigger value="dashboard">Dashboard</Tabs.Trigger>
@@ -65,7 +65,7 @@ function Component() {
         <Tabs.Content value="dashboard">
           <ServerDashboard />
         </Tabs.Content>
-        <Tabs.Content value="logs">
+        <Tabs.Content className="h-full" value="logs">
           <ServerLogs />
         </Tabs.Content>
         <Tabs.Content value="settings">

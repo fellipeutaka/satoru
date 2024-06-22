@@ -30,12 +30,12 @@ export function ServerLogs() {
   }, []);
 
   return (
-    <section className="my-6">
+    <section className="my-6 flex h-full max-h-[calc(100vh-18rem)] flex-1 flex-col">
       {data.is_running ? (
         <>
           <div
             ref={containerRef}
-            className="flex h-72 w-full flex-col gap-4 overflow-y-auto rounded-md border p-4 font-mono text-sm *:leading-7"
+            className="h-full space-y-4 overflow-y-auto rounded-md border p-4 font-mono text-sm *:leading-7"
           >
             {lines?.map((line, index) => (
               // biome-ignore lint/suspicious/noArrayIndexKey:

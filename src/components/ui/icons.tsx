@@ -287,7 +287,7 @@ export const Icons = {
       <path d="M6 3L20 12 6 21 6 3z" />
     </svg>
   ),
-  Pause: (props) => (
+  Ban: (props) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={24}
@@ -300,8 +300,8 @@ export const Icons = {
       strokeLinejoin="round"
       {...props}
     >
-      <rect x={14} y={4} width={4} height={16} rx={1} />
-      <rect x={6} y={4} width={4} height={16} rx={1} />
+      <circle cx={12} cy={12} r={10} />
+      <path d="M4.9 4.9l14.2 14.2" />
     </svg>
   ),
   FolderOpen: (props) => (

@@ -1,4 +1,9 @@
-use std::process::{Command, Output};
+use std::{
+    os::windows::process::CommandExt,
+    process::{Command, Output},
+};
+
+use super::creation_flags::CREATE_NO_WINDOW;
 
 pub fn run_server(server_path: String, ram_amount: String) -> Result<Output, std::io::Error> {
     return Command::new("java")
@@ -10,5 +15,6 @@ pub fn run_server(server_path: String, ram_amount: String) -> Result<Output, std
             "server.jar".to_string(),
             "nogui".to_string(),
         ])
+        .creation_flags(CREATE_NO_WINDOW)
         .output();
 }

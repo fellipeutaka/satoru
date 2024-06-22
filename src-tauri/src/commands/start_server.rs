@@ -1,6 +1,7 @@
 use command_group::CommandGroup;
 use std::{
     io::{BufRead, BufReader},
+    os::windows::process::CommandExt,
     path::Path,
     process::{Command, Stdio},
     thread,
@@ -10,7 +11,10 @@ use tokio::sync::Mutex;
 
 use crate::{
     data::servers::{Server, SERVER_LIST},
-    utils::{get_server_properties::get_server_properties, run_ngrok::run_ngrok},
+    utils::{
+        creation_flags::DETACHED_PROCESS, get_server_properties::get_server_properties,
+        run_ngrok::run_ngrok,
+    },
 };
 
 #[tauri::command]
@@ -41,6 +45,7 @@ pub async fn start_server(
             "nogui".to_string(),
         ])
         .stdout(Stdio::piped())
+        .creation_flags(DETACHED_PROCESS)
         .group_spawn();
 
     let server_properties = get_server_properties(server_path_buf.to_path_buf());
