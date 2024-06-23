@@ -236,7 +236,6 @@ export function ServerSettingsForm() {
           render={({ field }) => (
             <Form.Item>
               <div className="flex items-center gap-2">
-                <Form.Label>Online mode</Form.Label>
                 <Form.Control>
                   <Switch
                     checked={field.value}
@@ -245,6 +244,7 @@ export function ServerSettingsForm() {
                     <Switch.Thumb />
                   </Switch>
                 </Form.Control>
+                <Form.Label>Online mode</Form.Label>
               </div>
               <Form.Description>
                 Enable or disable online mode. When enabled, players must have a
@@ -261,7 +261,6 @@ export function ServerSettingsForm() {
           render={({ field }) => (
             <Form.Item>
               <div className="flex items-center gap-2">
-                <Form.Label>Hardcore</Form.Label>
                 <Form.Control>
                   <Switch
                     checked={field.value}
@@ -270,6 +269,7 @@ export function ServerSettingsForm() {
                     <Switch.Thumb />
                   </Switch>
                 </Form.Control>
+                <Form.Label>Hardcore</Form.Label>
               </div>
               <Form.Description>
                 When enabled, the server will be in hardcore mode.
@@ -285,7 +285,6 @@ export function ServerSettingsForm() {
           render={({ field }) => (
             <Form.Item>
               <div className="flex items-center gap-2">
-                <Form.Label>Allow Nether</Form.Label>
                 <Form.Control>
                   <Switch
                     checked={field.value}
@@ -294,6 +293,7 @@ export function ServerSettingsForm() {
                     <Switch.Thumb />
                   </Switch>
                 </Form.Control>
+                <Form.Label>Allow Nether</Form.Label>
               </div>
               <Form.Description>
                 Enable or disable the Nether dimension.
@@ -309,7 +309,6 @@ export function ServerSettingsForm() {
           render={({ field }) => (
             <Form.Item>
               <div className="flex items-center gap-2">
-                <Form.Label>PvP</Form.Label>
                 <Form.Control>
                   <Switch
                     checked={field.value}
@@ -318,6 +317,7 @@ export function ServerSettingsForm() {
                     <Switch.Thumb />
                   </Switch>
                 </Form.Control>
+                <Form.Label>PvP</Form.Label>
               </div>
               <Form.Description>
                 Enable or disable player vs player combat.
