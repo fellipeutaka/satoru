@@ -9,7 +9,7 @@ pub struct DownloadSpigotProps {
 }
 
 #[tauri::command]
-pub async fn download_spigot(props: DownloadSpigotProps) -> Result<String, String> {
+pub async fn download_spigot(props: DownloadSpigotProps) -> Result<(), String> {
     let url = format!(
         "https://download.getbukkit.org/spigot/spigot-{}.jar",
         props.version
@@ -19,11 +19,11 @@ pub async fn download_spigot(props: DownloadSpigotProps) -> Result<String, Strin
     match response {
         Ok(mut file) => {
             let path = std::path::Path::new(&props.server_dir).join("server.jar");
-            let mut dest = std::fs::File::create(path.clone()).expect("Failed to create file");
+            let mut dest = std::fs::File::create(path).expect("Failed to create file");
             while let Some(chunk) = file.chunk().await.map_err(|e| e.to_string())? {
                 dest.write_all(&chunk).map_err(|e| e.to_string())?;
             }
-            Ok(format!("File downloaded to {}", path.display()))
+            Ok(())
         }
         Err(err) => Err(err.to_string()),
     }
