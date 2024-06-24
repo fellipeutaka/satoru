@@ -19,8 +19,10 @@ import { getSystemInfoQuery } from "~/lib/tanstack-query/queries/get-system-info
 export const Route = createFileRoute("/servers/$name")({
   component: Component,
   loader: async ({ params }) => {
-    await queryClient.ensureQueryData(getServerQuery(params.name));
-    await queryClient.ensureQueryData(getSystemInfoQuery);
+    await Promise.all([
+      queryClient.ensureQueryData(getServerQuery(params.name)),
+      queryClient.ensureQueryData(getSystemInfoQuery),
+    ]);
   },
 });
 

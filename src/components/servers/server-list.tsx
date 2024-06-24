@@ -12,6 +12,7 @@ import { ServerListEmpty } from "./server-list-empty";
 
 export function ServerList() {
   const { data: servers } = useSuspenseQuery(getServersQuery);
+
   const isListEmpty = servers?.length === 0;
 
   if (isListEmpty) {

@@ -1,5 +1,5 @@
 import { queryOptions } from "@tanstack/react-query";
-import { getServers } from "~/lib/tauri/commands";
+import { getServers } from "~/lib/tauri/commands/get-servers";
 import { getSettings } from "~/utils/get-settings";
 import { queryKeys } from "../keys";
 

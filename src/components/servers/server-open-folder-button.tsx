@@ -1,6 +1,6 @@
 import { useParams } from "@tanstack/react-router";
 import { useTransition } from "react";
-import { openFolder } from "~/lib/tauri/commands";
+import { openFolder } from "~/lib/tauri/commands/open-folder";
 import { getServerPath } from "~/utils/get-server-path";
 import { Button } from "../ui/button";
 import { Icons } from "../ui/icons";

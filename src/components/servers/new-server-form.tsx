@@ -1,9 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { createServer } from "~/lib/tauri/commands";
+import { getJavaVersionQuery } from "~/lib/tanstack-query/queries/get-java-version";
+import { createServer } from "~/lib/tauri/commands/create-server";
 import { getSettings } from "~/utils/get-settings";
 import { Button } from "../ui/button";
 import { Dialog } from "../ui/dialog";
@@ -31,7 +33,34 @@ export function NewServerForm() {
   });
   const router = useRouter();
 
+  const { data: javaVersion } = useSuspenseQuery(getJavaVersionQuery);
+
   const handleSubmit = form.handleSubmit(async (values) => {
+    if (!javaVersion) {
+      const loading = toast.loading("Installing Java...");
+
+      try {
+        const { installJava } = await import(
+          "~/lib/tauri/commands/install-java"
+        );
+        await installJava();
+
+        toast.success("Java installed successfully!", {
+          id: loading,
+        });
+      } catch (err) {
+        if (err instanceof Error) {
+          return toast.error(err.message, {
+            id: loading,
+          });
+        }
+
+        return toast.error("Failed to install Java.", {
+          id: loading,
+        });
+      }
+    }
+
     const loading = toast.loading("Creating server...");
 
     try {
@@ -54,7 +83,13 @@ export function NewServerForm() {
           name: values.name,
         },
       });
-    } catch (_err) {
+    } catch (err) {
+      if (err instanceof Error) {
+        return toast.error(err.message, {
+          id: loading,
+        });
+      }
+
       toast.error("Failed to create server.", {
         id: loading,
       });

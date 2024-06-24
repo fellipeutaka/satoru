@@ -1,5 +1,5 @@
 import { queryOptions } from "@tanstack/react-query";
-import { getSystemInfo } from "~/lib/tauri/commands";
+import { getSystemInfo } from "~/lib/tauri/commands/get-system-info";
 import { queryKeys } from "../keys";
 
 const bytesToGigaBytes = (bytes: number) => bytes / 1024 / 1024 / 1024;

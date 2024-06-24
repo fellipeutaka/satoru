@@ -1,7 +1,7 @@
 import { useParams, useRouter } from "@tanstack/react-router";
 import { useTransition } from "react";
 import { toast } from "sonner";
-import { deleteServer } from "~/lib/tauri/commands";
+import { deleteServer } from "~/lib/tauri/commands/delete-server";
 import { getServerPath } from "~/utils/get-server-path";
 import { AlertDialog } from "../ui/alert-dialog";
 import { Button } from "../ui/button";

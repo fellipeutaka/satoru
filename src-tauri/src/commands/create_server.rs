@@ -17,6 +17,11 @@ pub struct CreateServerProps {
 #[tauri::command]
 pub async fn create_server(props: CreateServerProps) -> Result<(), String> {
     let server_path = Path::new(&props.server_dir).join(&props.name);
+
+    if server_path.exists() {
+        return Err("Server already exists".to_string());
+    }
+
     create_folder(server_path.to_str().unwrap()).await?;
 
     let server_props = serde_json::json!({

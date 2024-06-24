@@ -8,11 +8,17 @@ import { ServerList } from "~/components/servers/server-list";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import { queryClient } from "~/lib/tanstack-query/client";
+import { getJavaVersionQuery } from "~/lib/tanstack-query/queries/get-java-version";
 import { getServersQuery } from "~/lib/tanstack-query/queries/get-servers";
 
 export const Route = createFileRoute("/servers/")({
   component: Component,
-  loader: () => queryClient.ensureQueryData(getServersQuery),
+  loader: async () => {
+    await Promise.all([
+      queryClient.ensureQueryData(getServersQuery),
+      queryClient.ensureQueryData(getJavaVersionQuery),
+    ]);
+  },
   errorComponent: ErrorComponent,
 });
 

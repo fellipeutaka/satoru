@@ -7,7 +7,7 @@ import { z } from "zod";
 import { DIFFICULTY } from "~/constants/dificulty";
 import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
 import { getSystemInfoQuery } from "~/lib/tanstack-query/queries/get-system-info";
-import { saveServerSettings } from "~/lib/tauri/commands";
+import { saveServerSettings } from "~/lib/tauri/commands/save-server-settings";
 import { getServerPath } from "~/utils/get-server-path";
 import { Alert } from "../ui/alert";
 import { Button } from "../ui/button";

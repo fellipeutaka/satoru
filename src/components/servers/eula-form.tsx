@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { queryClient } from "~/lib/tanstack-query/client";
 import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
-import { acceptTerms } from "~/lib/tauri/commands";
+import { acceptTerms } from "~/lib/tauri/commands/accept-terms";
 import { getSettings } from "~/utils/get-settings";
 import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";

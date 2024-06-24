@@ -16,7 +16,7 @@ export function NewServerDialog() {
         <Dialog.Header>
           <Dialog.Title>New Server</Dialog.Title>
           <Dialog.Description>
-            Create a new server for your application.
+            Fill in the form below to create a new Minecraft server.
           </Dialog.Description>
         </Dialog.Header>
         <NewServerForm />

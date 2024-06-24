@@ -36,7 +36,6 @@ pub async fn get_server(props: GetServerProps) -> Result<GetServerResponse, Stri
     let eula = std::fs::read_to_string(eula_path).unwrap_or("eula=false".to_string());
     let eula_accepted = eula.contains("eula=true");
 
-    // Get server.properties
     let server_properties = get_server_properties(server_path.clone());
 
     let satoru_json = std::fs::read_to_string(server_path.join("satoru.json")).unwrap();

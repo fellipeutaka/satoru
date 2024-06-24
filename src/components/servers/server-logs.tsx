@@ -2,7 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
-import { listenToServerLogs } from "~/lib/tauri/events";
+import { listenToServerLogs } from "~/lib/tauri/events/server-logs";
 import { Alert } from "../ui/alert";
 import { Icons } from "../ui/icons";
 import { Input } from "../ui/input";
