@@ -1,4 +1,5 @@
 import { invoke } from "@tauri-apps/api";
+import type { ServerProperties } from "./get-server";
 
 interface Server {
   is_running: boolean;
@@ -7,6 +8,8 @@ interface Server {
   version: string;
   created_at: string;
   ip: string;
+  player_count: number;
+  server_properties: ServerProperties;
 }
 
 export async function getServers(serverFolder: string) {

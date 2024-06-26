@@ -21,6 +21,7 @@ pub struct GetServerResponse {
     pub server_properties: ServerProperties,
     pub description: String,
     pub start_time: u64,
+    pub player_count: u32,
 }
 
 #[tauri::command]
@@ -59,5 +60,6 @@ pub async fn get_server(props: GetServerProps) -> Result<GetServerResponse, Stri
         start_time: server
             .map(|server| server.start_time.elapsed().as_secs())
             .unwrap_or(0),
+        player_count: server.map_or(0, |server| *server.player_count.lock().unwrap()),
     })
 }

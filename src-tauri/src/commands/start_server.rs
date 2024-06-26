@@ -1,13 +1,13 @@
 use command_group::CommandGroup;
+use regex::Regex;
 use std::{
     io::{BufRead, BufReader},
     os::windows::process::CommandExt,
     path::Path,
     process::{Command, Stdio},
-    thread,
     time::Instant,
 };
-use tauri::Manager;
+use tauri::{async_runtime::spawn, Manager};
 use tokio::sync::Mutex;
 
 use crate::{
@@ -49,17 +49,38 @@ pub async fn start_server(
 
     let tcp_tunnel = run_ngrok(ngrok_token, server_properties.server_port).await;
 
+    let joined_regex =
+        Regex::new(r"\[User Authenticator #\d+/INFO\]: UUID of player (.+) is .+").unwrap();
+    let left_regex = Regex::new(r"\[Server thread/INFO\]: (.+) left the game").unwrap();
+
     match command {
         Ok(mut child) => {
             let stdout = child.inner().stdout.take();
 
             if let Some(stdout) = stdout {
                 let reader = BufReader::new(stdout);
+                let server_path_clone = server_path.clone();
 
-                thread::spawn(move || {
+                spawn(async move {
                     for line in reader.lines() {
                         match line {
                             Ok(line) => {
+                                let server_list = SERVER_LIST.lock().await;
+
+                                let mut player_count = server_list
+                                    .iter()
+                                    .find(|server| server.server_path == server_path_clone)
+                                    .unwrap()
+                                    .player_count
+                                    .lock()
+                                    .unwrap();
+
+                                if joined_regex.is_match(&line) {
+                                    *player_count += 1;
+                                } else if left_regex.is_match(&line) {
+                                    *player_count -= 1;
+                                }
+
                                 app.emit_all("server-logs", line).unwrap();
                             }
                             Err(e) => {
@@ -75,6 +96,7 @@ pub async fn start_server(
                 child: Mutex::new(Some(child)),
                 tcp_tunnel: Mutex::new(tcp_tunnel),
                 start_time: Instant::now(),
+                player_count: std::sync::Mutex::new(0),
             });
 
             Ok(())

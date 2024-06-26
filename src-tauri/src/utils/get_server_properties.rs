@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Default)]
 pub struct ServerProperties {
     pub level_seed: String,
     pub gamemode: String,

@@ -12,8 +12,8 @@ export const getServersQuery = queryOptions({
     return servers.map((server) => ({
       id: server.path,
       name: server.name,
-      maxPlayers: 100,
-      onlinePlayers: 12,
+      maxPlayers: server.server_properties.max_players,
+      onlinePlayers: server.player_count,
       version: server.version,
       ip: server.ip,
       isRunning: server.is_running,

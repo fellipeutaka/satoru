@@ -73,7 +73,7 @@ export function ServerDashboard() {
         </Card.Header>
         <Card.Content>
           <span className="font-bold text-2xl tracking-tight">
-            {server.is_running ? 43 : "-"}
+            {server.is_running ? server.player_count : "-"}
           </span>
           <p className="text-muted-foreground text-xs">
             {server.is_running ? "Online" : "Offline"} /{" "}
