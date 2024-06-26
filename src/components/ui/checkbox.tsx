@@ -1,5 +1,3 @@
-"use client";
-
 import { Indicator, Root } from "@radix-ui/react-checkbox";
 import { tv } from "tailwind-variants";
 import { type IconProps, Icons } from "./icons";
