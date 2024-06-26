@@ -10,8 +10,9 @@ interface GetServerProps {
 interface GetServerResponse {
   eula_accepted: boolean;
   is_running: boolean;
-  ram_amount: number;
+  ram: number;
   description: string;
+  start_time: number;
   server_properties: {
     level_seed: string;
     gamemode: string;

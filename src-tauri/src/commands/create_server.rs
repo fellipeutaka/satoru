@@ -28,7 +28,7 @@ pub async fn create_server(props: CreateServerProps) -> Result<(), String> {
         "name": props.name,
         "description": props.description,
         "version": props.version,
-        "ram_amount": 1024
+        "ram": 1024
     })
     .to_string();
     let server_props_path = server_path.join("satoru.json");

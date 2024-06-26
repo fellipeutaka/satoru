@@ -5,6 +5,7 @@ use std::{
     path::Path,
     process::{Command, Stdio},
     thread,
+    time::Instant,
 };
 use tauri::Manager;
 use tokio::sync::Mutex;
@@ -29,11 +30,7 @@ pub async fn start_server(
     let satoru_json_path = server_path_buf.join("satoru.json");
     let satoru_json = std::fs::read_to_string(satoru_json_path).unwrap();
     let server_props: serde_json::Value = serde_json::from_str(&satoru_json).unwrap();
-    let ram = server_props["ram_amount"]
-        .as_str()
-        .unwrap_or("1024")
-        .to_owned()
-        + "M";
+    let ram = server_props["ram"].as_str().unwrap_or("1024").to_owned() + "M";
 
     let command = Command::new("java")
         .current_dir(server_path.clone())
@@ -77,6 +74,7 @@ pub async fn start_server(
                 server_path,
                 child: Mutex::new(Some(child)),
                 tcp_tunnel: Mutex::new(tcp_tunnel),
+                start_time: Instant::now(),
             });
 
             Ok(())

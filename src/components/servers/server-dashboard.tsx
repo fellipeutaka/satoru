@@ -1,9 +1,45 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
 import { getSystemInfoQuery } from "~/lib/tanstack-query/queries/get-system-info";
 import { Card } from "../ui/card";
 import { Icons } from "../ui/icons";
+
+function formatUptime(uptime: number) {
+  const seconds = uptime % 60;
+  const minutes = Math.floor(uptime / 60) % 60;
+  const hours = Math.floor(uptime / 3600) % 24;
+  const days = Math.floor(uptime / 86400) % 7;
+  const weeks = Math.floor(uptime / 604800) % 4;
+  const months = Math.floor(uptime / 2592000) % 12;
+  const years = Math.floor(uptime / 31536000);
+
+  let formattedUptime = "";
+  if (years > 0) {
+    formattedUptime += `${years}y `;
+  }
+  if (months > 0) {
+    formattedUptime += `${months}m `;
+  }
+  if (weeks > 0) {
+    formattedUptime += `${weeks}w `;
+  }
+  if (days > 0) {
+    formattedUptime += `${days}d `;
+  }
+  if (hours > 0) {
+    formattedUptime += `${hours}h `;
+  }
+  if (minutes > 0) {
+    formattedUptime += `${minutes}m `;
+  }
+  if (seconds > 0) {
+    formattedUptime += `${seconds}s`;
+  }
+
+  return formattedUptime.trim();
+}
 
 export function ServerDashboard() {
   const { data: systemInfo } = useSuspenseQuery(getSystemInfoQuery);
@@ -12,6 +48,19 @@ export function ServerDashboard() {
     from: "/servers/$name",
   });
   const { data: server } = useSuspenseQuery(getServerQuery(name));
+
+  const [uptime, setUptime] = useState(server.start_time);
+
+  useEffect(() => {
+    if (server.is_running) {
+      const interval = setInterval(() => {
+        setUptime((prev) => prev + 1);
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+    setUptime(0);
+  }, [server.is_running]);
 
   return (
     <div className="my-6 grid flex-1 gap-4 lg:grid-cols-3 sm:grid-cols-2">
@@ -40,7 +89,7 @@ export function ServerDashboard() {
         </Card.Header>
         <Card.Content>
           <span className="font-bold text-2xl tracking-tight">
-            {server.is_running ? "7d 12h 34m" : "-"}
+            {formatUptime(uptime) || "-"}
           </span>
           <p className="text-muted-foreground text-xs">Continuously running</p>
         </Card.Content>

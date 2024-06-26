@@ -59,7 +59,7 @@ export function ServerSettingsForm() {
   const form = useForm<ServerSettings>({
     resolver: zodResolver(createSchema(systemInfo.memoryTotal)),
     defaultValues: {
-      ram: server.ram_amount / 1024,
+      ram: server.ram / 1024,
       description: server.description,
       port: server.server_properties.server_port,
       maxPlayers: server.server_properties.max_players,

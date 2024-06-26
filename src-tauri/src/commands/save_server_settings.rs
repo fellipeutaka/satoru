@@ -82,7 +82,7 @@ pub fn save_server_settings(props: SaveServerSettingsProps) -> Result<(), String
     let server_props: serde_json::Value = serde_json::from_str(&satoru_json).unwrap();
 
     let mut new_server_props = server_props.clone();
-    new_server_props["ram_amount"] = serde_json::Value::from(props.ram_in_gb * 1024);
+    new_server_props["ram"] = serde_json::Value::from(props.ram_in_gb * 1024);
     new_server_props["description"] = serde_json::Value::from(props.description);
 
     std::fs::write(

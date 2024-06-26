@@ -17,9 +17,10 @@ pub struct GetServerProps {
 pub struct GetServerResponse {
     pub eula_accepted: bool,
     pub is_running: bool,
-    pub ram_amount: u32,
+    pub ram: u64,
     pub server_properties: ServerProperties,
     pub description: String,
+    pub start_time: u64,
 }
 
 #[tauri::command]
@@ -40,6 +41,9 @@ pub async fn get_server(props: GetServerProps) -> Result<GetServerResponse, Stri
 
     let satoru_json = std::fs::read_to_string(server_path.join("satoru.json")).unwrap();
     let server_props: serde_json::Value = serde_json::from_str(&satoru_json).unwrap();
+    let server = server_list
+        .iter()
+        .find(|server| server.server_path == server_path.to_str().unwrap().to_string());
 
     Ok(GetServerResponse {
         eula_accepted,
@@ -47,10 +51,13 @@ pub async fn get_server(props: GetServerProps) -> Result<GetServerResponse, Stri
         is_running: server_list
             .iter()
             .any(|server| server.server_path == server_path.to_str().unwrap().to_string()),
-        ram_amount: server_props["ram_amount"].as_u64().unwrap_or(1024) as u32,
+        ram: server_props["ram"].as_u64().unwrap_or(1024),
         description: server_props["description"]
             .as_str()
             .unwrap_or("")
             .to_string(),
+        start_time: server
+            .map(|server| server.start_time.elapsed().as_secs())
+            .unwrap_or(0),
     })
 }
