@@ -5,7 +5,9 @@ import { ServerDashboard } from "~/components/servers/server-dashboard";
 import { ServerDeleteButton } from "~/components/servers/server-delete-button";
 import { ServerEulaPage } from "~/components/servers/server-eula-page";
 import { ServerLogs } from "~/components/servers/server-logs";
+import { ServerMods } from "~/components/servers/server-mods";
 import { ServerOpenFolderButton } from "~/components/servers/server-open-folder-button";
+import { ServerPlugins } from "~/components/servers/server-plugins";
 import { ServerSettingsForm } from "~/components/servers/server-settings-form";
 import { ServerToggleButton } from "~/components/servers/server-toggle-button";
 import { ButtonStyles } from "~/components/ui/button";
@@ -54,6 +56,7 @@ function Component() {
           <Tabs.List>
             <Tabs.Trigger value="dashboard">Dashboard</Tabs.Trigger>
             <Tabs.Trigger value="plugins">Plugins</Tabs.Trigger>
+            <Tabs.Trigger value="mods">Mods</Tabs.Trigger>
             <Tabs.Trigger value="logs">Logs</Tabs.Trigger>
             <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
           </Tabs.List>
@@ -66,6 +69,12 @@ function Component() {
         </div>
         <Tabs.Content value="dashboard">
           <ServerDashboard />
+        </Tabs.Content>
+        <Tabs.Content value="plugins">
+          <ServerPlugins />
+        </Tabs.Content>
+        <Tabs.Content value="mods">
+          <ServerMods />
         </Tabs.Content>
         <Tabs.Content className="h-full" value="logs">
           <ServerLogs />
