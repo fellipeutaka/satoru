@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api";
-import type { Difficulty } from "~/constants/dificulty";
+import type { Difficulty } from "~/constants/difficulty";
 
 interface SaveServerSettingsProps {
   server_path: string;

@@ -4,7 +4,7 @@ import { useParams } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { DIFFICULTY } from "~/constants/dificulty";
+import { DIFFICULTY } from "~/constants/difficulty";
 import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
 import { getSystemInfoQuery } from "~/lib/tanstack-query/queries/get-system-info";
 import { saveServerSettings } from "~/lib/tauri/commands/save-server-settings";

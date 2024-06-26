@@ -4,7 +4,9 @@ import { useRouter } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { queryClient } from "~/lib/tanstack-query/client";
 import { getJavaVersionQuery } from "~/lib/tanstack-query/queries/get-java-version";
+import { getServersQuery } from "~/lib/tanstack-query/queries/get-servers";
 import { createServer } from "~/lib/tauri/commands/create-server";
 import { getSettings } from "~/utils/get-settings";
 import { Button } from "../ui/button";
@@ -84,6 +86,10 @@ export function NewServerForm() {
         },
       });
     } catch (err) {
+      await queryClient.invalidateQueries({
+        queryKey: getServersQuery.queryKey,
+      });
+
       if (err instanceof Error) {
         return toast.error(err.message, {
           id: loading,
