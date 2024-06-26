@@ -28,8 +28,8 @@
     "@radix-ui/react-switch": "next",
     "@radix-ui/react-tabs": "next",
     "@radix-ui/react-tooltip": "next",
-    "@tanstack/react-query": "^5.45.0",
-    "@tanstack/react-router": "^1.38.1",
+    "@tanstack/react-query": "^5.48.0",
+    "@tanstack/react-router": "^1.40.0",
     "@tauri-apps/api": "^1.5.6",
     "@tauri-apps/plugin-store": "github:tauri-apps/tauri-plugin-store#v1",
     "cmdk": "^1.0.0",
@@ -40,8 +40,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.1",
-    "@tanstack/router-vite-plugin": "^1.38.0",
+    "@biomejs/biome": "^1.8.2",
+    "@tanstack/router-vite-plugin": "^1.39.13",
     "@tauri-apps/cli": "^1.5.14",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
@@ -53,7 +53,7 @@
     "tailwind-variants": "^0.2.1",
     "tailwindcss": "^3.4.4",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.2",
     "vite": "^5.3.1",
     "vite-tsconfig-paths": "^4.3.2"
   }
