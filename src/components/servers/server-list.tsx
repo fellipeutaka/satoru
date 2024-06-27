@@ -22,7 +22,7 @@ export function ServerList() {
   return (
     <section>
       <NewServerDialog />
-      <div className="mt-6 grid gap-4 lg:grid-cols-3 md:grid-cols-2">
+      <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {servers?.map((server) => (
           <Card key={server.id}>
             <Card.Header className="space-y-2">

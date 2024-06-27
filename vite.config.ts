@@ -4,15 +4,8 @@ import { defineConfig } from "vite";
 import viteTsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
-export default defineConfig(async () => ({
-  plugins: [
-    react(),
-    viteTsconfigPaths(),
-    TanStackRouterVite({
-      quoteStyle: "double",
-      semicolons: true,
-    }),
-  ],
+export default defineConfig({
+  plugins: [react(), viteTsconfigPaths(), TanStackRouterVite()],
 
   // Prevent vite from obscuring rust errors
   clearScreen: false,
@@ -25,4 +18,4 @@ export default defineConfig(async () => ({
       ignored: ["**/src-tauri/**"],
     },
   },
-}));
+});

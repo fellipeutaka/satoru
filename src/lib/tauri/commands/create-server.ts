@@ -12,8 +12,6 @@ export async function createServer(props: CreateServerProps) {
   try {
     await invoke("create_server", { props });
   } catch (err) {
-    console.error(err);
-
     if (typeof err !== "string") {
       throw new Error("Failed to create a server");
     }

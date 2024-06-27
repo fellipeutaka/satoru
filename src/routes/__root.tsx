@@ -7,7 +7,7 @@ export const Route = createRootRoute({
 
 function Component() {
   return (
-    <div className="grid grid-cols-[1fr,6fr] xl:grid-cols-[1fr,9fr] *:p-4">
+    <div className="grid grid-cols-[1fr,6fr] *:p-4 xl:grid-cols-[1fr,9fr]">
       <Sidebar />
       <Outlet />
     </div>

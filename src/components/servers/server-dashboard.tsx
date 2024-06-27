@@ -63,7 +63,7 @@ export function ServerDashboard() {
   }, [server.is_running]);
 
   return (
-    <div className="my-6 grid flex-1 gap-4 lg:grid-cols-3 sm:grid-cols-2">
+    <div className="my-6 grid flex-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <Card>
         <Card.Header className="flex-row items-center justify-between">
           <Card.Title className="font-semibold text-base">
