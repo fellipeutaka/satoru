@@ -8,6 +8,7 @@ pub mod get_servers;
 pub mod get_system_info;
 pub mod install_java;
 pub mod open_folder;
+pub mod run_server_command;
 pub mod save_server_settings;
 pub mod start_server;
 pub mod stop_server;

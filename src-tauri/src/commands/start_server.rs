@@ -41,6 +41,7 @@ pub async fn start_server(
             "server.jar".to_string(),
             "nogui".to_string(),
         ])
+        .stdin(Stdio::piped())
         .stdout(Stdio::piped())
         .creation_flags(DETACHED_PROCESS)
         .group_spawn();

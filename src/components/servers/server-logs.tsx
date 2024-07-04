@@ -5,7 +5,7 @@ import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
 import { listenToServerLogs } from "~/lib/tauri/events/server-logs";
 import { Alert } from "../ui/alert";
 import { Icons } from "../ui/icons";
-import { Input } from "../ui/input";
+import { ServerLogsCommandForm } from "./server-logs-command-form";
 
 export function ServerLogs() {
   const { name } = useParams({
@@ -16,7 +16,7 @@ export function ServerLogs() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const promise = listenToServerLogs((event) => {
+    const listener = listenToServerLogs((event) => {
       setLines((prev) => [...prev, event.payload]);
       containerRef.current?.scrollTo({
         top: containerRef.current.scrollHeight,
@@ -25,7 +25,7 @@ export function ServerLogs() {
     });
 
     return () => {
-      promise.then((remove) => remove());
+      listener.then((remove) => remove());
     };
   }, []);
 
@@ -42,7 +42,7 @@ export function ServerLogs() {
               <p key={index}>{line}</p>
             ))}
           </div>
-          <Input className="mt-4" placeholder="Enter a command..." />
+          <ServerLogsCommandForm />
         </>
       ) : (
         <Alert variant="warning">
