@@ -1,21 +1,19 @@
-use command_group::CommandGroup;
+use process_wrap::std::{CreationFlags, JobObject, StdCommandWrap};
 use regex::Regex;
 use std::{
     io::{BufRead, BufReader},
     os::windows::process::CommandExt,
     path::Path,
-    process::{Command, Stdio},
+    process::Stdio,
     time::Instant,
 };
 use tauri::{async_runtime::spawn, Manager};
 use tokio::sync::Mutex;
+use windows::Win32::System::Threading::CREATE_NO_WINDOW;
 
 use crate::{
     data::servers::{Server, SERVER_LIST},
-    utils::{
-        creation_flags::DETACHED_PROCESS, get_server_properties::get_server_properties,
-        run_ngrok::run_ngrok,
-    },
+    utils::{get_server_properties::get_server_properties, run_ngrok::run_ngrok},
 };
 
 #[tauri::command]
@@ -32,19 +30,31 @@ pub async fn start_server(
     let server_props: serde_json::Value = serde_json::from_str(&satoru_json).unwrap();
     let ram = server_props["ram"].as_str().unwrap_or("1024").to_owned() + "M";
 
-    let command = Command::new("java")
-        .current_dir(server_path.clone())
-        .args([
-            "-Xmx".to_string() + &ram,
-            "-Xms".to_string() + &ram,
-            "-jar".to_string(),
-            "server.jar".to_string(),
-            "nogui".to_string(),
-        ])
-        .stdin(Stdio::piped())
-        .stdout(Stdio::piped())
-        .creation_flags(DETACHED_PROCESS)
-        .group_spawn();
+    let mut command = StdCommandWrap::with_new("java", |command| {
+        command
+            .current_dir(server_path.clone())
+            .args([
+                "-Xmx".to_string() + &ram,
+                "-Xms".to_string() + &ram,
+                "-jar".to_string(),
+                "server.jar".to_string(),
+                "nogui".to_string(),
+            ])
+            .creation_flags(CREATE_NO_WINDOW.0)
+            .stdin(Stdio::piped())
+            .stdout(Stdio::piped());
+    });
+
+    #[cfg(unix)]
+    {
+        command.wrap(ProcessGroup::leader());
+    }
+    #[cfg(windows)]
+    {
+        command
+            .wrap(JobObject)
+            .wrap(CreationFlags(CREATE_NO_WINDOW));
+    }
 
     let server_properties = get_server_properties(server_path_buf.to_path_buf());
 
@@ -54,9 +64,9 @@ pub async fn start_server(
         Regex::new(r"\[User Authenticator #\d+/INFO\]: UUID of player (.+) is .+").unwrap();
     let left_regex = Regex::new(r"\[Server thread/INFO\]: (.+) left the game").unwrap();
 
-    match command {
+    match command.spawn() {
         Ok(mut child) => {
-            let stdout = child.inner().stdout.take();
+            let stdout = child.stdout().take();
 
             if let Some(stdout) = stdout {
                 let reader = BufReader::new(stdout);

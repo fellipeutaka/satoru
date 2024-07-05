@@ -1,2 +1,0 @@
-pub const CREATE_NO_WINDOW: u32 = 0x08000000;
-pub const DETACHED_PROCESS: u32 = 0x00000008;

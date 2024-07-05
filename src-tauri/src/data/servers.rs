@@ -1,13 +1,13 @@
 use std::time::Instant;
 
-use command_group::GroupChild;
 use ngrok::{forwarder::Forwarder, tunnel::TcpTunnel};
 use once_cell::sync::Lazy;
+use process_wrap::std::StdChildWrapper;
 use tokio::sync::Mutex;
 
 pub struct Server {
     pub server_path: String,
-    pub child: Mutex<Option<GroupChild>>,
+    pub child: Mutex<Option<Box<dyn StdChildWrapper>>>,
     pub tcp_tunnel: Mutex<Forwarder<TcpTunnel>>,
     pub start_time: Instant,
     pub player_count: std::sync::Mutex<u32>,

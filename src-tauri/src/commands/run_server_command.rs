@@ -17,7 +17,7 @@ pub async fn run_server_command(server_path: String, command: String) -> Result<
             let mut child = server.child.lock().await;
 
             if let Some(ref mut child_process) = *child {
-                if let Some(stdin) = &mut child_process.inner().stdin {
+                if let Some(stdin) = &mut child_process.stdin() {
                     let mut writer = BufWriter::new(stdin);
                     let command_with_newline = format!("{}\n", command); // Append newline
                     let result = writer.write_all(command_with_newline.as_bytes());

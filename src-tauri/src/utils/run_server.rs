@@ -3,7 +3,7 @@ use std::{
     process::{Command, Output},
 };
 
-use super::creation_flags::CREATE_NO_WINDOW;
+use windows::Win32::System::Threading::CREATE_NO_WINDOW;
 
 pub fn run_server(server_path: String, ram: String) -> Result<Output, std::io::Error> {
     return Command::new("java")
@@ -15,6 +15,6 @@ pub fn run_server(server_path: String, ram: String) -> Result<Output, std::io::E
             "server.jar".to_string(),
             "nogui".to_string(),
         ])
-        .creation_flags(CREATE_NO_WINDOW)
+        .creation_flags(CREATE_NO_WINDOW.0)
         .output();
 }
