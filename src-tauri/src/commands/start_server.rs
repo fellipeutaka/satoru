@@ -67,14 +67,14 @@ pub async fn start_server(
                         match line {
                             Ok(line) => {
                                 let server_list = SERVER_LIST.lock().await;
-
-                                let mut player_count = server_list
+                                let current_server = server_list
                                     .iter()
-                                    .find(|server| server.server_path == server_path_clone)
-                                    .unwrap()
-                                    .player_count
-                                    .lock()
-                                    .unwrap();
+                                    .find(|server| server.server_path == server_path_clone);
+
+                                let mut player_count = match current_server {
+                                    Some(server) => server.player_count.lock().unwrap(),
+                                    None => continue,
+                                };
 
                                 if joined_regex.is_match(&line) {
                                     *player_count += 1;
