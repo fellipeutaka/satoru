@@ -24,6 +24,7 @@ regex = "1.10.5"
 ngrok = "0.14.0-pre.13"
 chrono = "0.4.38"
 tokio = "1.38.0"
+scraper = "0.19.0"
 
 [features]
 # This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!

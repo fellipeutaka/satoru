@@ -15,6 +15,7 @@ export const getServersQuery = queryOptions({
       maxPlayers: server.server_properties.max_players,
       onlinePlayers: server.player_count,
       version: server.version,
+      software: server.software,
       ip: server.ip,
       isRunning: server.is_running,
       createdAt: new Date(server.created_at),

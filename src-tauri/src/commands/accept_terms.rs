@@ -4,8 +4,8 @@ use serde::Deserialize;
 
 #[derive(Deserialize)]
 pub struct GetServerProps {
-    pub server_dir: String,
-    pub name: String,
+    server_dir: String,
+    name: String,
 }
 
 #[tauri::command]

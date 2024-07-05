@@ -11,13 +11,13 @@ import { Popover } from "../ui/popover";
 import type { NewServerFormValues } from "./new-server-form";
 
 export function NewServerFormVersionField() {
+  const form = useFormContext<NewServerFormValues>();
   const {
     data: versions,
     isLoading,
     isError,
-  } = useQuery(getMinecraftVersionsQuery);
+  } = useQuery(getMinecraftVersionsQuery(form.getValues("software")));
   const [isVersionOpen, setIsVersionOpen] = useState(false);
-  const form = useFormContext<NewServerFormValues>();
 
   return (
     <Form.Field
@@ -38,8 +38,8 @@ export function NewServerFormVersionField() {
                   role="combobox"
                 >
                   {field.value
-                    ? versions?.find((version) => version.id === field.value)
-                        ?.id
+                    ? versions?.find(({ version }) => version === field.value)
+                        ?.version
                     : "Select version"}
                   <Icons.ChevronDown className="ml-2 size-4 opacity-50 transition-transform duration-200 group-aria-expanded:rotate-180" />
                 </Button>
@@ -70,22 +70,25 @@ export function NewServerFormVersionField() {
                 </Command.Empty>
                 <Command.Group>
                   <Command.List>
-                    {versions?.map((version) => (
+                    {versions?.map(({ version, download_url }) => (
                       <Command.Item
-                        value={version.id}
-                        key={version.id}
+                        key={version}
+                        value={version}
                         onSelect={() => {
-                          form.setValue("version", version.id, {
+                          form.setValue("version", version, {
+                            shouldValidate: true,
+                          });
+                          form.setValue("downloadUrl", download_url, {
                             shouldValidate: true,
                           });
                           setIsVersionOpen(false);
                         }}
                       >
-                        {version.id}
+                        {version}
                         <Icons.Check
                           className={cn(
                             "ml-auto size-4",
-                            version.id === field.value
+                            version === field.value
                               ? "opacity-100"
                               : "opacity-0",
                           )}

@@ -40,6 +40,9 @@ export function ServerList() {
                 </Badge>
                 <Separator orientation="vertical" className="h-4" />
                 <Badge variant="secondary">{server.version}</Badge>
+                <Badge variant="secondary" className="capitalize">
+                  {server.software}
+                </Badge>
               </div>
               <div className="flex items-center gap-1">
                 <Icons.Users className="size-4" />

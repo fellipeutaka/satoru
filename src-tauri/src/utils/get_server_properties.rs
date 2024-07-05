@@ -37,7 +37,6 @@ pub struct ServerProperties {
     pub simulation_distance: u16,
     pub rcon_password: String,
     pub player_idle_timeout: u16,
-    pub debug: bool,
     pub force_gamemode: bool,
     pub rate_limit: u16,
     pub hardcore: bool,
@@ -128,7 +127,6 @@ pub fn get_server_properties(server_path: PathBuf) -> ServerProperties {
         player_idle_timeout: get_server_property("player-idle-timeout")
             .parse::<u16>()
             .unwrap(),
-        debug: get_server_property("debug").parse::<bool>().unwrap(),
         force_gamemode: get_server_property("force-gamemode")
             .parse::<bool>()
             .unwrap(),

@@ -2,19 +2,19 @@ use std::io::Write;
 
 use serde::Deserialize;
 
+use crate::utils::get_server_jar_download_url::get_server_jar_download_url;
+
 #[derive(Deserialize)]
-pub struct DownloadSpigotProps {
+pub struct DownloadServerJarProps {
     pub server_dir: String,
-    pub version: String,
+    pub download_url: String,
 }
 
 #[tauri::command]
-pub async fn download_spigot(props: DownloadSpigotProps) -> Result<(), String> {
-    let url = format!(
-        "https://download.getbukkit.org/spigot/spigot-{}.jar",
-        props.version
-    );
-    let response = reqwest::get(url).await;
+pub async fn download_server_jar(props: DownloadServerJarProps) -> Result<(), String> {
+    let server_jar_url = get_server_jar_download_url(props.download_url).await;
+
+    let response = reqwest::get(server_jar_url).await;
 
     match response {
         Ok(mut file) => {

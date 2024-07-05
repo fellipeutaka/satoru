@@ -2,16 +2,18 @@ use serde::Deserialize;
 use std::{fs, path::Path};
 
 use crate::{
-    commands::download_spigot::{download_spigot, DownloadSpigotProps},
+    commands::download_server_jar::{download_server_jar, DownloadServerJarProps},
     utils::{create_folder::create_folder, run_server::run_server},
 };
 
 #[derive(Deserialize)]
 pub struct CreateServerProps {
-    pub name: String,
-    pub description: String,
-    pub version: String,
-    pub server_dir: String,
+    name: String,
+    description: String,
+    version: String,
+    server_dir: String,
+    software: String,
+    download_url: String,
 }
 
 #[tauri::command]
@@ -28,15 +30,16 @@ pub async fn create_server(props: CreateServerProps) -> Result<(), String> {
         "name": props.name,
         "description": props.description,
         "version": props.version,
-        "ram": 1024
+        "ram": 1024,
+        "software": props.software
     })
     .to_string();
     let server_props_path = server_path.join("satoru.json");
     fs::write(server_props_path, server_props).unwrap();
 
-    download_spigot(DownloadSpigotProps {
+    download_server_jar(DownloadServerJarProps {
         server_dir: server_path.to_str().unwrap().to_string(),
-        version: props.version,
+        download_url: props.download_url,
     })
     .await?;
 

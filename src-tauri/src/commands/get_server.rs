@@ -9,19 +9,19 @@ use crate::{
 
 #[derive(Deserialize)]
 pub struct GetServerProps {
-    pub server_dir: String,
-    pub name: String,
+    server_dir: String,
+    name: String,
 }
 
 #[derive(Deserialize, Serialize)]
 pub struct GetServerResponse {
-    pub eula_accepted: bool,
-    pub is_running: bool,
-    pub ram: u64,
-    pub server_properties: ServerProperties,
-    pub description: String,
-    pub start_time: u64,
-    pub player_count: u32,
+    eula_accepted: bool,
+    is_running: bool,
+    ram: u64,
+    server_properties: ServerProperties,
+    description: String,
+    start_time: u64,
+    player_count: u32,
 }
 
 #[tauri::command]

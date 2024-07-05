@@ -6,6 +6,8 @@ interface CreateServerProps {
   description: string;
   version: string;
   server_dir: string;
+  software: string;
+  download_url: string;
 }
 
 export async function createServer(props: CreateServerProps) {

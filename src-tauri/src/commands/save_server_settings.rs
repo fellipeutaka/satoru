@@ -5,16 +5,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize)]
 pub struct SaveServerSettingsProps {
-    pub server_path: String,
-    pub ram_in_gb: u16,
-    pub description: String,
-    pub port: u16,
-    pub max_players: u16,
-    pub online_mode: bool,
-    pub difficulty: String,
-    pub hardcore: bool,
-    pub allow_nether: bool,
-    pub pvp: bool,
+    server_path: String,
+    ram_in_gb: u16,
+    description: String,
+    port: u16,
+    max_players: u16,
+    online_mode: bool,
+    difficulty: String,
+    hardcore: bool,
+    allow_nether: bool,
+    pvp: bool,
 }
 
 #[tauri::command]

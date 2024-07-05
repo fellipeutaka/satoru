@@ -15,6 +15,7 @@ pub struct Server {
     path: String,
     is_running: bool,
     version: String,
+    software: String,
     created_at: String,
     ip: String,
     player_count: u32,
@@ -40,6 +41,7 @@ pub async fn get_servers(server_folder: String) -> Result<Vec<Server>, String> {
                             let server_props: serde_json::Value =
                                 serde_json::from_str(&satoru_json).unwrap();
                             let version = server_props["version"].as_str().unwrap().to_string();
+                            let software = server_props["software"].as_str().unwrap().to_string();
 
                             let created_date: DateTime<Utc> =
                                 DateTime::from(path.metadata().unwrap().created().unwrap());
@@ -67,6 +69,7 @@ pub async fn get_servers(server_folder: String) -> Result<Vec<Server>, String> {
                                 name: path.file_name().unwrap().to_str().unwrap().to_string(),
                                 path: server_path.clone(),
                                 version,
+                                software,
                                 is_running: server.is_some(),
                                 created_at,
                                 ip: ip.to_string(),

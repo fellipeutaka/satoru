@@ -1,8 +1,9 @@
 pub mod accept_terms;
 pub mod create_server;
 pub mod delete_server;
-pub mod download_spigot;
+pub mod download_server_jar;
 pub mod get_java_version;
+pub mod get_minecraft_versions;
 pub mod get_server;
 pub mod get_servers;
 pub mod get_system_info;

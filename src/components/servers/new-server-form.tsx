@@ -4,6 +4,7 @@ import { useRouter } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { SOFTWARES } from "~/constants/softwares";
 import { queryClient } from "~/lib/tanstack-query/client";
 import { getJavaVersionQuery } from "~/lib/tanstack-query/queries/get-java-version";
 import { getServersQuery } from "~/lib/tanstack-query/queries/get-servers";
@@ -14,12 +15,15 @@ import { Dialog } from "../ui/dialog";
 import { Form } from "../ui/form";
 import { Icons } from "../ui/icons";
 import { Input } from "../ui/input";
+import { Select } from "../ui/select";
 import { NewServerFormVersionField } from "./new-server-form-version-field";
 
 const newServerFormSchema = z.object({
   name: z.string().trim().min(1, "Server name is required."),
   description: z.string().trim().min(1, "Server description is required."),
+  software: z.enum(SOFTWARES),
   version: z.string().trim().min(1, "Server version is required."),
+  downloadUrl: z.string().trim().min(1, "Server download URL is required."),
 });
 
 export type NewServerFormValues = z.infer<typeof newServerFormSchema>;
@@ -30,6 +34,7 @@ export function NewServerForm() {
     defaultValues: {
       name: "",
       description: "",
+      software: "vanilla",
       version: "",
     },
   });
@@ -73,6 +78,8 @@ export function NewServerForm() {
         description: values.description,
         version: values.version,
         server_dir: serverFolder,
+        software: values.software,
+        download_url: values.downloadUrl,
       });
 
       toast.success("Server created successfully!", {
@@ -118,6 +125,7 @@ export function NewServerForm() {
             </Form.Item>
           )}
         />
+
         <Form.Field
           control={form.control}
           name="description"
@@ -127,6 +135,41 @@ export function NewServerForm() {
               <Form.Control>
                 <Input placeholder="Server Description" {...field} />
               </Form.Control>
+              <Form.Message />
+            </Form.Item>
+          )}
+        />
+
+        <Form.Field
+          control={form.control}
+          name="software"
+          render={({ field }) => (
+            <Form.Item>
+              <Form.Label>Software</Form.Label>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Form.Control>
+                  <Select.Trigger className="capitalize">
+                    <Select.Value
+                      placeholder={
+                        <span className="text-muted-foreground">
+                          Select a software
+                        </span>
+                      }
+                    />
+                  </Select.Trigger>
+                </Form.Control>
+                <Select.Content>
+                  {SOFTWARES.map((software) => (
+                    <Select.Item
+                      className="capitalize"
+                      key={software}
+                      value={software}
+                    >
+                      {software}
+                    </Select.Item>
+                  ))}
+                </Select.Content>
+              </Select>
               <Form.Message />
             </Form.Item>
           )}

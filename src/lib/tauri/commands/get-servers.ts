@@ -5,6 +5,7 @@ interface Server {
   is_running: boolean;
   name: string;
   path: string;
+  software: string;
   version: string;
   created_at: string;
   ip: string;

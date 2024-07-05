@@ -41,7 +41,7 @@ export function SelectTrigger({
     >
       {children}
       <Icon asChild>
-        <Icons.ChevronDown className="size-4 opacity-50 transition-transform duration-200 aria-expanded:rotate-180" />
+        <Icons.ChevronDown className="size-4 opacity-50 transition-transform duration-200 group-aria-expanded:rotate-180" />
       </Icon>
     </Trigger>
   );
