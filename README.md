@@ -57,5 +57,5 @@ pnpm install
 3. Run the project
 
 ```bash
-pnpm tauri dev
+pnpm app dev
 ```

@@ -31,11 +31,11 @@
     }
   },
   "files": {
-    "ignore": ["./src/routeTree.gen.ts", "./src-tauri/**/*"]
+    "ignore": ["**/*src/routeTree.gen.ts", "**/*src-tauri/**/*"]
   },
   "overrides": [
     {
-      "include": ["./*.config.ts", "./*.config.js"],
+      "include": ["**/*.config.ts", "**/*.config.js"],
       "linter": {
         "rules": {
           "style": {
@@ -45,7 +45,7 @@
       }
     },
     {
-      "include": ["./src/routes/**/*.tsx"],
+      "include": ["apps/app/src/routes/**/*.tsx"],
       "linter": {
         "rules": {
           "style": {
@@ -55,7 +55,7 @@
       }
     },
     {
-      "include": ["./src/components/ui/icons.tsx"],
+      "include": ["apps/app/src/components/ui/icons.tsx"],
       "linter": {
         "rules": {
           "a11y": {
