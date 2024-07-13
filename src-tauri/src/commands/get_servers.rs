@@ -29,7 +29,8 @@ pub async fn get_servers(server_folder: String) -> Result<Vec<Server>, String> {
 
     match entries {
         Ok(entries) => {
-            let mut servers: Vec<Server> = vec![];
+            let mut servers: Vec<Server> = Vec::new();
+
             for entry in entries {
                 if let Ok(entry) = entry {
                     let path = entry.path();

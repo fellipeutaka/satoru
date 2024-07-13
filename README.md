@@ -2,48 +2,58 @@
 
 Manage your Minecraft Servers easily with Satoru.
 
+![Satoru](./.github/screenshot.png)
+
 ## Features
 
-- Manage multiple Minecraft Servers
-- Start, Stop, Restart, and Kill your Minecraft Servers
-- View the console output of your Minecraft Servers
-- View the logs of your Minecraft Servers
-- View the server.properties of your Minecraft Servers
-- View the banned-ips.json of your Minecraft Servers
-- View the banned-players.json of your Minecraft Servers
-- View the ops.json of your Minecraft Servers
-- View the whitelist.json of your Minecraft Servers
-- View the usercache.json of your Minecraft Servers
-- View the eula.txt of your Minecraft Servers
-- View the server-icon.png of your Minecraft Servers
-- View the world folder of your Minecraft Servers
-- View the plugins folder of your Minecraft Servers
-- View the mods folder of your Minecraft Servers
-- View the config folder of your Minecraft Servers
-- View the scripts folder of your Minecraft Servers
-- View the backups folder of your Minecraft Servers
-- View the logs folder of your Minecraft Servers
+- ✅: Supported
+- 🚫: Not in progress
+- ⌛️: In progress
+- ⚠️: Partially supported (with some caveats)
 
-## Satoru Configurations
+| Feature | Status |
+| -------- | ------- |
+| Create a new server | <span aria-label="Supported" role="img">✅</span>
+| Delete a server | <span aria-label="Supported" role="img">✅</span>
+| Start a server | <span aria-label="Supported" role="img">✅</span>
+| Stop a server | <span aria-label="Supported" role="img">✅</span>
+| Restart a server | <span aria-label="In Progress" role="img">⌛️</span>
+| Vanilla software | <span aria-label="Supported" role="img">✅</span>
+| Spigot software | <span aria-label="Supported" role="img">✅</span>
+| CraftBukkit software | <span aria-label="Supported" role="img">✅</span>
+| Backup servers | <span aria-label="Not in Progress" role="img">🚫</span>
+| Add plugins | <span aria-label="Partially supported" role="img">⚠️</span>
+| Add mods | <span aria-label="Partially supported" role="img">⚠️</span>
+| Read server logs | <span aria-label="Supported" role="img">✅</span>
+| Run commands | <span aria-label="In Progress" role="img">⌛️</span>
+| Manage server settings | <span aria-label="Supported" role="img">✅</span>
+| Minecraft Bedrock | <span aria-label="Not in Progress" role="img">🚫</span>
+| Whitelist | <span aria-label="Not in Progress" role="img">🚫</span>
 
-- Minecraft Server Directory
-- Minecraft Server Java Path
-- Minecraft Server Java Arguments
-- Minecraft Server Java Version
-- Minecraft Server Java Memory
-- Minecraft Server Java Max Memory
-- Minecraft Server Java Min Memory
-- Minecraft Server Java Server Type
-- Minecraft Server Java Server Version
-- Minecraft Server Java Server Jar
-- Minecraft Server Java Server Port
-- Minecraft Server Java Server IP
-- Minecraft Server Java Server Name
-- Minecraft Server Java Server MOTD
-- Minecraft Server Java Server Difficulty
-- Minecraft Server Java Server Gamemode
-- Minecraft Server Java Server Max Players
+## How to use
 
-## Recommended IDE Setup
+### Prerequisites
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+- [Node.js](https://nodejs.org)
+- [pnpm (package manager)](https://pnpm.io/installation)
+- [Rust and system dependencies](https://tauri.app/v1/guides/getting-started/prerequisites)
+
+### Steps
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/fellipeutaka/satoru.git
+```
+
+2. Install the dependencies
+
+```bash
+pnpm install
+```
+
+3. Run the project
+
+```bash
+pnpm tauri dev
+```
