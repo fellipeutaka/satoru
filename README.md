@@ -2,7 +2,8 @@
 
 Manage your Minecraft Servers easily with Satoru.
 
-![Satoru](./.github/screenshot.png)
+![Server list](./.github/screenshot.png)
+![Server details](./.github/screenshot-2.png)
 
 ## Features
 
@@ -17,7 +18,7 @@ Manage your Minecraft Servers easily with Satoru.
 | Delete a server | <span aria-label="Supported" role="img">✅</span>
 | Start a server | <span aria-label="Supported" role="img">✅</span>
 | Stop a server | <span aria-label="Supported" role="img">✅</span>
-| Restart a server | <span aria-label="In Progress" role="img">⌛️</span>
+| Open server folder | <span aria-label="Supported" role="img">✅</span>
 | Vanilla software | <span aria-label="Supported" role="img">✅</span>
 | Spigot software | <span aria-label="Supported" role="img">✅</span>
 | CraftBukkit software | <span aria-label="Supported" role="img">✅</span>
@@ -26,6 +27,7 @@ Manage your Minecraft Servers easily with Satoru.
 | Add mods | <span aria-label="Partially supported" role="img">⚠️</span>
 | Read server logs | <span aria-label="Supported" role="img">✅</span>
 | Run commands | <span aria-label="In Progress" role="img">⌛️</span>
+| Track system resources | <span aria-label="In Progress" role="img">⌛️</span>
 | Manage server settings | <span aria-label="Supported" role="img">✅</span>
 | Minecraft Bedrock | <span aria-label="Not in Progress" role="img">🚫</span>
 | Whitelist | <span aria-label="Not in Progress" role="img">🚫</span>
