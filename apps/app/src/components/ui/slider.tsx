@@ -11,7 +11,7 @@ export function SliderRoot({
       ref={ref}
       className={cn(
         "relative flex w-full touch-none select-none items-center",
-        className,
+        className
       )}
       {...props}
     />
@@ -28,7 +28,7 @@ export function SliderTrack({
       ref={ref}
       className={cn(
         "relative h-1.5 w-full grow overflow-hidden rounded-full bg-primary/20",
-        className,
+        className
       )}
       {...props}
     />
@@ -59,7 +59,7 @@ export function SliderThumb({
       ref={ref}
       className={cn(
         "block size-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
-        className,
+        className
       )}
       {...props}
     />

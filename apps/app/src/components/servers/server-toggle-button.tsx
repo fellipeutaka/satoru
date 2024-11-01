@@ -18,7 +18,7 @@ function toggleServerAction(name: string, isRunning: boolean) {
     const serverPath = await join(serverFolder, name);
 
     const loading = toast.loading(
-      isRunning ? "Stopping server..." : "Starting server...",
+      isRunning ? "Stopping server..." : "Starting server..."
     );
 
     if (isRunning) {
@@ -57,7 +57,7 @@ export function ServerToggleButton() {
 
   const [_, handleToggleServer, isPending] = useActionState(
     toggleServerAction(name, data.is_running),
-    null,
+    null
   );
 
   return (

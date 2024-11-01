@@ -10,10 +10,10 @@ export const CardStyles = {
     base: ["flex flex-col space-y-1.5 p-6"],
   }),
   Title: tv({
-    base: ["text-2xl font-semibold leading-none tracking-tight"],
+    base: ["font-semibold text-2xl leading-none tracking-tight"],
   }),
   Description: tv({
-    base: ["text-sm text-muted-foreground"],
+    base: ["text-muted-foreground text-sm"],
   }),
   Content: tv({
     base: ["p-6 pt-0"],

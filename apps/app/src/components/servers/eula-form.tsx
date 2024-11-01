@@ -49,7 +49,7 @@ export function EulaForm() {
         loading: "Accepting terms...",
         success: "Terms accepted successfully!",
         error: "Failed to accept terms.",
-      },
+      }
     );
   });
 

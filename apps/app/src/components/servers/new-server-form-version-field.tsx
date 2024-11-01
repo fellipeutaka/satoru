@@ -32,10 +32,9 @@ export function NewServerFormVersionField() {
                 <Button
                   className={cn(
                     "group flex w-full justify-between font-normal",
-                    !field.value && "text-muted-foreground",
+                    !field.value && "text-muted-foreground"
                   )}
                   variant="outline"
-                  role="combobox"
                 >
                   {field.value
                     ? versions?.find(({ version }) => version === field.value)
@@ -62,6 +61,7 @@ export function NewServerFormVersionField() {
                       <Icons.Loader className="size-4 animate-spin" />
                       Fetching versions...
                     </div>
+                    // biome-ignore lint/nursery/noNestedTernary: This is a simple ternary statement
                   ) : isError ? (
                     "Failed to fetch versions."
                   ) : (
@@ -90,7 +90,7 @@ export function NewServerFormVersionField() {
                             "ml-auto size-4",
                             version === field.value
                               ? "opacity-100"
-                              : "opacity-0",
+                              : "opacity-0"
                           )}
                         />
                       </Command.Item>

@@ -22,11 +22,27 @@
       },
       "nursery": {
         "all": true,
-        "noReactSpecificProps": "off",
-        "noUndeclaredDependencies": "off",
-        "useImportExtensions": "off",
         "useImportRestrictions": "off",
-        "noLabelWithoutControl": "off"
+        "useExplicitType": "off",
+        "useComponentExportOnlyModules": "off",
+        "useConsistentCurlyBraces": "off",
+        "noUnknownPseudoClass": "off",
+        "useSortedClasses": {
+          "fix": "safe",
+          "level": "error",
+          "options": {
+            "functions": ["tv", "cn"]
+          }
+        }
+      },
+      "suspicious": {
+        "all": true,
+        "noReactSpecificProps": "off"
+      },
+      "correctness": {
+        "all": true,
+        "noUndeclaredDependencies": "off",
+        "useImportExtensions": "off"
       }
     }
   },

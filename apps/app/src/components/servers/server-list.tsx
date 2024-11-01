@@ -32,7 +32,7 @@ export function ServerList() {
                   <div
                     className={cn(
                       "mr-2 h-2 w-2 rounded-full",
-                      server.isRunning ? "bg-green-500" : "bg-red-500",
+                      server.isRunning ? "bg-green-500" : "bg-red-500"
                     )}
                     aria-hidden
                   />

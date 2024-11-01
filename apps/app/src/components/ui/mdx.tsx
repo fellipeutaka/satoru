@@ -12,7 +12,7 @@ export const Mdx = {
       {...props}
       className={cn(
         "mt-10 border-b pb-1 font-semibold text-3xl tracking-tight first:mt-0",
-        props.className,
+        props.className
       )}
     />
   ),
@@ -21,7 +21,7 @@ export const Mdx = {
       {...props}
       className={cn(
         "mt-8 font-semibold text-2xl tracking-tight",
-        props.className,
+        props.className
       )}
     />
   ),
@@ -32,7 +32,7 @@ export const Mdx = {
       {...props}
       className={cn(
         "font-medium underline underline-offset-4",
-        props.className,
+        props.className
       )}
     />
   ),

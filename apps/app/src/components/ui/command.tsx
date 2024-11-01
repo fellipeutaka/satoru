@@ -14,7 +14,7 @@ export function CommandRoot({
       ref={ref}
       className={cn(
         "flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground",
-        className,
+        className
       )}
       {...props}
     />
@@ -47,7 +47,7 @@ export function CommandInput({
         ref={ref}
         className={cn(
           "flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
-          className,
+          className
         )}
         {...props}
       />
@@ -65,7 +65,7 @@ export function CommandList({
       ref={ref}
       className={cn(
         "max-h-[300px] overflow-y-auto overflow-x-hidden",
-        className,
+        className
       )}
       {...props}
     />
@@ -96,7 +96,7 @@ export function CommandGroup({
       ref={ref}
       className={cn(
         "overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group-heading]]:text-xs",
-        className,
+        className
       )}
       {...props}
     />
@@ -127,7 +127,7 @@ export function CommandItem({
       ref={ref}
       className={cn(
         "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground",
-        className,
+        className
       )}
       {...props}
     />
@@ -144,7 +144,7 @@ export function CommandShortcut({
       ref={ref}
       className={cn(
         "ml-auto text-muted-foreground text-xs tracking-widest",
-        className,
+        className
       )}
       {...props}
     />

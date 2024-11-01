@@ -95,7 +95,7 @@ export function ServerSettingsForm() {
           return "Server settings updated";
         },
         error: "Failed to update server settings",
-      },
+      }
     );
   });
 

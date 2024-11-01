@@ -2,7 +2,7 @@ import { type VariantProps, tv } from "tailwind-variants";
 
 export const BadgeStyles = tv({
   base: [
-    "inline-flex items-center rounded-full border border-transparent px-2.5 py-0.5 text-xs font-semibold outline-none transition-colors",
+    "inline-flex items-center rounded-full border border-transparent px-2.5 py-0.5 font-semibold text-xs outline-none transition-colors",
     "focus:ring-2 focus:ring-ring focus:ring-offset-2",
   ],
   variants: {

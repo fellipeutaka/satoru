@@ -7,7 +7,7 @@ import {
 
 export async function getSettings() {
   const data = settingsSchema.safeParse(
-    await settingsStore.get(settingsStoreKeys.settings),
+    await settingsStore.get(settingsStoreKeys.settings)
   );
   if (data.success) {
     return data.data;
