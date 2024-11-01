@@ -1,6 +1,6 @@
 import type { DialogProps } from "@radix-ui/react-dialog";
 import { Command as CommandPrimitive } from "cmdk";
-import { cn } from "~/lib/utils";
+import { cx } from "~/lib/cva";
 import { Dialog } from "./dialog";
 import { Icons } from "./icons";
 
@@ -12,7 +12,7 @@ export function CommandRoot({
   return (
     <CommandPrimitive
       ref={ref}
-      className={cn(
+      className={cx(
         "flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground",
         className
       )}
@@ -45,7 +45,7 @@ export function CommandInput({
       <Icons.Search className="mr-2 size-4 shrink-0 opacity-50" />
       <CommandPrimitive.Input
         ref={ref}
-        className={cn(
+        className={cx(
           "flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
           className
         )}
@@ -63,7 +63,7 @@ export function CommandList({
   return (
     <CommandPrimitive.List
       ref={ref}
-      className={cn(
+      className={cx(
         "max-h-[300px] overflow-y-auto overflow-x-hidden",
         className
       )}
@@ -80,7 +80,7 @@ export function CommandEmpty({
   return (
     <CommandPrimitive.Empty
       ref={ref}
-      className={cn("py-6 text-center text-sm", className)}
+      className={cx("py-6 text-center text-sm", className)}
       {...props}
     />
   );
@@ -94,7 +94,7 @@ export function CommandGroup({
   return (
     <CommandPrimitive.Group
       ref={ref}
-      className={cn(
+      className={cx(
         "overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group-heading]]:text-xs",
         className
       )}
@@ -111,7 +111,7 @@ export function CommandSeparator({
   return (
     <CommandPrimitive.Separator
       ref={ref}
-      className={cn("-mx-1 h-px bg-border", className)}
+      className={cx("-mx-1 h-px bg-border", className)}
       {...props}
     />
   );
@@ -125,7 +125,7 @@ export function CommandItem({
   return (
     <CommandPrimitive.Item
       ref={ref}
-      className={cn(
+      className={cx(
         "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground",
         className
       )}
@@ -142,7 +142,7 @@ export function CommandShortcut({
   return (
     <span
       ref={ref}
-      className={cn(
+      className={cx(
         "ml-auto text-muted-foreground text-xs tracking-widest",
         className
       )}

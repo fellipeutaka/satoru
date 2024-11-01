@@ -1,7 +1,7 @@
-import { type VariantProps, tv } from "tailwind-variants";
+import { type VariantProps, cva } from "~/lib/cva";
 
 export const AlertStyles = {
-  Root: tv({
+  Root: cva({
     base: [
       "relative w-full rounded-lg border px-4 py-3 text-sm",
       "[&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:top-4 [&>svg]:left-4 [&>svg]:text-foreground [&>svg~*]:pl-7",
@@ -20,10 +20,10 @@ export const AlertStyles = {
       variant: "default",
     },
   }),
-  Title: tv({
+  Title: cva({
     base: ["mb-1 font-medium leading-none tracking-tight"],
   }),
-  Description: tv({
+  Description: cva({
     base: ["text-sm [&_p]:leading-relaxed"],
   }),
 };

@@ -1,24 +1,24 @@
-import { tv } from "tailwind-variants";
+import { cva } from "~/lib/cva";
 
 export const CardStyles = {
-  Root: tv({
+  Root: cva({
     base: [
       "rounded-lg border border-border bg-card text-card-foreground shadow-sm",
     ],
   }),
-  Header: tv({
+  Header: cva({
     base: ["flex flex-col space-y-1.5 p-6"],
   }),
-  Title: tv({
+  Title: cva({
     base: ["font-semibold text-2xl leading-none tracking-tight"],
   }),
-  Description: tv({
+  Description: cva({
     base: ["text-muted-foreground text-sm"],
   }),
-  Content: tv({
+  Content: cva({
     base: ["p-6 pt-0"],
   }),
-  Footer: tv({
+  Footer: cva({
     base: ["flex items-center p-6 pt-0"],
   }),
 };

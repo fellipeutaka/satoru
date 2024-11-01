@@ -9,7 +9,7 @@ import {
 } from "react-hook-form";
 
 import { Slot } from "@radix-ui/react-slot";
-import { cn } from "~/lib/utils";
+import { cx } from "~/lib/cva";
 import { Label, type LabelProps } from "./label";
 
 const FormRoot = FormProvider;
@@ -74,7 +74,7 @@ function FormItem({ ref, className, ...props }: React.ComponentProps<"div">) {
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
+      <div ref={ref} className={cx("space-y-2", className)} {...props} />
     </FormItemContext.Provider>
   );
 }
@@ -113,7 +113,7 @@ function FormDescription({
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cx("text-muted-foreground text-sm", className)}
       {...props}
     />
   );
@@ -136,7 +136,7 @@ function FormMessage({
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("font-medium text-destructive text-sm", className)}
+      className={cx("font-medium text-destructive text-sm", className)}
       {...props}
     >
       {body}

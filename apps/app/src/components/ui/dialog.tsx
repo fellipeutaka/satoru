@@ -8,18 +8,18 @@ import {
   Title,
   Trigger,
 } from "@radix-ui/react-dialog";
-import { tv } from "tailwind-variants";
+import { cva } from "cva";
 import { Icons } from "./icons";
 
 export const DialogStyles = {
-  Overlay: tv({
+  Overlay: cva({
     base: [
       "fixed inset-0 z-50 bg-background/80 backdrop-blur-sm",
       "data-[state=open]:fade-in-0 data-[state=open]:animate-in",
       "data-[state=closed]:fade-out-0 data-[state=closed]:animate-out",
     ],
   }),
-  Content: tv({
+  Content: cva({
     base: [
       "-translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 grid w-full max-w-lg gap-4 border border-border bg-background p-6 shadow-lg duration-200",
       "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] data-[state=open]:animate-in",
@@ -27,7 +27,7 @@ export const DialogStyles = {
       "sm:rounded-lg",
     ],
   }),
-  Close: tv({
+  Close: cva({
     base: [
       "absolute top-4 right-4 rounded-sm opacity-70 ring-offset-background transition",
       "hover:opacity-100",
@@ -36,16 +36,16 @@ export const DialogStyles = {
       "data-[state=open]:bg-accent data-[state=open]:text-muted-foreground",
     ],
   }),
-  Header: tv({
+  Header: cva({
     base: ["flex flex-col space-y-1.5 text-center", "sm:text-left"],
   }),
-  Footer: tv({
+  Footer: cva({
     base: ["flex flex-col-reverse", "sm:flex-row sm:justify-end sm:space-x-2"],
   }),
-  Title: tv({
+  Title: cva({
     base: ["font-semibold text-lg leading-none tracking-tight"],
   }),
-  Description: tv({
+  Description: cva({
     base: ["text-muted-foreground text-sm"],
   }),
 };

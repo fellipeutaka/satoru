@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+import { cx } from "cva";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { getMinecraftVersionsQuery } from "~/lib/tanstack-query/queries/get-minecraft-versions";
-import { cn } from "~/lib/utils";
 import { Button } from "../ui/button";
 import { Command } from "../ui/command";
 import { Form } from "../ui/form";
@@ -30,7 +30,7 @@ export function NewServerFormVersionField() {
             <Popover.Trigger asChild>
               <Form.Control>
                 <Button
-                  className={cn(
+                  className={cx(
                     "group flex w-full justify-between font-normal",
                     !field.value && "text-muted-foreground"
                   )}
@@ -86,7 +86,7 @@ export function NewServerFormVersionField() {
                       >
                         {version}
                         <Icons.Check
-                          className={cn(
+                          className={cx(
                             "ml-auto size-4",
                             version === field.value
                               ? "opacity-100"

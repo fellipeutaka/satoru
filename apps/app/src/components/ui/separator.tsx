@@ -1,6 +1,6 @@
-import { tv } from "tailwind-variants";
+import { cva } from "~/lib/cva";
 
-export const SeparatorStyles = tv({
+export const SeparatorStyles = cva({
   base: ["shrink-0 bg-border"],
   variants: {
     orientation: {

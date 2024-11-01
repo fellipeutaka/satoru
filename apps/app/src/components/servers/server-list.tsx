@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
+import { cx } from "~/lib/cva";
 import { getServersQuery } from "~/lib/tanstack-query/queries/get-servers";
-import { cn } from "~/lib/utils";
 import { Badge } from "../ui/badge";
 import { ButtonStyles } from "../ui/button";
 import { Card } from "../ui/card";
@@ -30,7 +30,7 @@ export function ServerList() {
               <div className="flex items-center gap-2 text-sm">
                 <Badge variant="outline">
                   <div
-                    className={cn(
+                    className={cx(
                       "mr-2 h-2 w-2 rounded-full",
                       server.isRunning ? "bg-green-500" : "bg-red-500"
                     )}

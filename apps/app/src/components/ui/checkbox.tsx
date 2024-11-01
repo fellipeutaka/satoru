@@ -1,9 +1,9 @@
 import { Indicator, Root } from "@radix-ui/react-checkbox";
-import { tv } from "tailwind-variants";
+import { cva } from "~/lib/cva";
 import { type IconProps, Icons } from "./icons";
 
 export const CheckboxStyles = {
-  Root: tv({
+  Root: cva({
     base: [
       "peer size-4 shrink-0 rounded-sm border border-primary shadow",
       "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
@@ -11,10 +11,10 @@ export const CheckboxStyles = {
       "data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
     ],
   }),
-  Indicator: tv({
+  Indicator: cva({
     base: "flex items-center justify-center text-current",
   }),
-  Icon: tv({
+  Icon: cva({
     base: "size-4",
   }),
 };
