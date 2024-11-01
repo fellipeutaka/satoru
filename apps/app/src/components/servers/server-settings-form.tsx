@@ -53,7 +53,8 @@ export function ServerSettingsForm() {
   const { name } = useParams({
     from: "/servers/$name",
   });
-  const { data: systemInfo } = useSuspenseQuery(getSystemInfoQuery);
+
+  const { data: systemInfo } = useSuspenseQuery(getSystemInfoQuery(name));
   const { data: server } = useSuspenseQuery(getServerQuery(name));
 
   const form = useForm<ServerSettings>({

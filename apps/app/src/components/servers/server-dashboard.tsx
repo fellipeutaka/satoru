@@ -3,52 +3,20 @@ import { useParams } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
 import { getSystemInfoQuery } from "~/lib/tanstack-query/queries/get-system-info";
+import { formatCpuUsage } from "~/utils/format-cpu-usage";
+import { formatUptime } from "~/utils/format-uptime";
 import { Card } from "../ui/card";
 import { Icons } from "../ui/icons";
 
-function formatUptime(uptime: number) {
-  const seconds = uptime % 60;
-  const minutes = Math.floor(uptime / 60) % 60;
-  const hours = Math.floor(uptime / 3600) % 24;
-  const days = Math.floor(uptime / 86400) % 7;
-  const weeks = Math.floor(uptime / 604800) % 4;
-  const months = Math.floor(uptime / 2592000) % 12;
-  const years = Math.floor(uptime / 31536000);
-
-  let formattedUptime = "";
-  if (years > 0) {
-    formattedUptime += `${years}y `;
-  }
-  if (months > 0) {
-    formattedUptime += `${months}m `;
-  }
-  if (weeks > 0) {
-    formattedUptime += `${weeks}w `;
-  }
-  if (days > 0) {
-    formattedUptime += `${days}d `;
-  }
-  if (hours > 0) {
-    formattedUptime += `${hours}h `;
-  }
-  if (minutes > 0) {
-    formattedUptime += `${minutes}m `;
-  }
-  if (seconds > 0) {
-    formattedUptime += `${seconds}s`;
-  }
-
-  return formattedUptime.trim();
-}
-
 export function ServerDashboard() {
-  const { data: systemInfo } = useSuspenseQuery(getSystemInfoQuery);
-
   const { name } = useParams({
     from: "/servers/$name",
   });
   const { data: server } = useSuspenseQuery(getServerQuery(name));
-
+  const { data: systemInfo } = useSuspenseQuery({
+    ...getSystemInfoQuery(name),
+    refetchInterval: server.is_running ? 2000 : false,
+  });
   const [uptime, setUptime] = useState(server.start_time);
 
   useEffect(() => {
@@ -102,7 +70,7 @@ export function ServerDashboard() {
         </Card.Header>
         <Card.Content>
           <span className="font-bold text-2xl tracking-tight">
-            {server.is_running ? "68%" : "-"}
+            {server.is_running ? formatCpuUsage(systemInfo.cpuUsage) : "-"}
           </span>
           <p className="text-muted-foreground text-xs">of 8 cores</p>
         </Card.Content>

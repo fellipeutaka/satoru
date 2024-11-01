@@ -12,7 +12,9 @@
   ],
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.tsdk": "node_modules\\typescript\\lib",
+  "editor.defaultFormatter": "biomejs.biome",
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
-  }
+  },
+  "rust-analyzer.linkedProjects": ["apps/app/src-tauri/Cargo.toml"]
 }

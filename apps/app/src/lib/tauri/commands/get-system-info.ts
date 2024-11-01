@@ -1,11 +1,16 @@
 import { invoke } from "@tauri-apps/api";
 
-interface GetSystemInfoResponse {
-  memory_total: number;
-  memory_used: number;
-  cpu_cores: number;
+interface GetSystemInfoProps {
+  serverPath: string;
 }
 
-export async function getSystemInfo() {
-  return await invoke<GetSystemInfoResponse>("get_system_info");
+interface GetSystemInfoResponse {
+  cpu_cores: number;
+  cpu_usage: number;
+  memory_total: number;
+  memory_used: number;
+}
+
+export async function getSystemInfo({ serverPath }: GetSystemInfoProps) {
+  return await invoke<GetSystemInfoResponse>("get_system_info", { serverPath });
 }

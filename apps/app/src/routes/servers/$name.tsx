@@ -23,7 +23,7 @@ export const Route = createFileRoute("/servers/$name")({
   loader: async ({ params }) => {
     await Promise.all([
       queryClient.ensureQueryData(getServerQuery(params.name)),
-      queryClient.ensureQueryData(getSystemInfoQuery),
+      queryClient.ensureQueryData(getSystemInfoQuery(params.name)),
     ]);
   },
 });
