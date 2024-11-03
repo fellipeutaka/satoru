@@ -86,6 +86,9 @@ importers:
       sonner:
         specifier: ^1.5.0
         version: 1.5.0(react-dom@19.0.0-rc-b7e21579-20241031(react@19.0.0-rc-b7e21579-20241031))(react@19.0.0-rc-b7e21579-20241031)
+      use-stick-to-bottom:
+        specifier: ^1.0.41
+        version: 1.0.41(react@19.0.0-rc-b7e21579-20241031)
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -1970,6 +1973,11 @@ packages:
       '@types/react':
         optional: true
 
+  use-stick-to-bottom@1.0.41:
+    resolution: {integrity: sha512-jJNtZNpvbTdQzgASo2yxDezA9C3BUgG1xbnslVry145auf0NlzspcX7V8cFX6Ir5Sw4ztCSk2B7YZ3XQ/Q9XXQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+
   use-sync-external-store@1.2.2:
     resolution: {integrity: sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==}
     peerDependencies:
@@ -3727,6 +3735,10 @@ snapshots:
       tslib: 2.8.1
     optionalDependencies:
       '@types/react': 18.3.12
+
+  use-stick-to-bottom@1.0.41(react@19.0.0-rc-b7e21579-20241031):
+    dependencies:
+      react: 19.0.0-rc-b7e21579-20241031
 
   use-sync-external-store@1.2.2(react@19.0.0-rc-b7e21579-20241031):
     dependencies:

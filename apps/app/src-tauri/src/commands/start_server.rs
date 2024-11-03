@@ -1,5 +1,6 @@
 use process_wrap::std::{CreationFlags, JobObject, StdCommandWrap};
 use regex::Regex;
+use serde::Serialize;
 use std::{
     io::{BufRead, BufReader},
     os::windows::process::CommandExt,
@@ -15,6 +16,14 @@ use crate::{
     data::servers::{Server, SERVER_LIST},
     utils::{get_server_properties::get_server_properties, run_ngrok::run_ngrok},
 };
+
+#[derive(Serialize, Clone)]
+struct ServerLog {
+    id: usize,
+    timestamp: Option<String>,
+    thread: Option<String>,
+    message: String,
+}
 
 #[tauri::command]
 pub async fn start_server(
@@ -73,7 +82,7 @@ pub async fn start_server(
                 let server_path_clone = server_path.clone();
 
                 spawn(async move {
-                    for line in reader.lines() {
+                    for (index, line) in reader.lines().enumerate() {
                         match line {
                             Ok(line) => {
                                 let server_list = SERVER_LIST.lock().await;
@@ -92,7 +101,29 @@ pub async fn start_server(
                                     *player_count -= 1;
                                 }
 
-                                app.emit_all("server-logs", line).unwrap();
+                                let log_regex = Regex::new(r"\[(.+)\] \[(.+)\]: (.+)").unwrap();
+                                let log_capture = log_regex.captures(&line);
+                                let log = ServerLog {
+                                    id: index,
+                                    timestamp: match log_capture {
+                                        Some(ref log) => {
+                                            Some(log.get(1).unwrap().as_str().to_string())
+                                        }
+                                        None => None,
+                                    },
+                                    thread: match log_capture {
+                                        Some(ref log) => {
+                                            Some(log.get(2).unwrap().as_str().to_string())
+                                        }
+                                        None => None,
+                                    },
+                                    message: match log_capture {
+                                        Some(ref log) => log.get(3).unwrap().as_str().to_string(),
+                                        None => line,
+                                    },
+                                };
+
+                                app.emit_all("server-logs", log).unwrap();
                             }
                             Err(e) => {
                                 println!("Error: {}", e);

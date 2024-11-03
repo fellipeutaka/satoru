@@ -1,9 +1,15 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { useStickToBottom } from "use-stick-to-bottom";
+import { cx } from "~/lib/cva";
 import { getServerQuery } from "~/lib/tanstack-query/queries/get-server";
-import { listenToServerLogs } from "~/lib/tauri/events/server-logs";
+import {
+  type ServerLog,
+  listenToServerLogs,
+} from "~/lib/tauri/events/server-logs";
 import { Alert } from "../ui/alert";
+import { Button } from "../ui/button";
 import { Icons } from "../ui/icons";
 import { ServerLogsCommandForm } from "./server-logs-command-form";
 
@@ -12,16 +18,21 @@ export function ServerLogs() {
     from: "/servers/$name",
   });
   const { data } = useSuspenseQuery(getServerQuery(name));
-  const [lines, setLines] = useState<string[]>([]);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [logs, setLogs] = useState<ServerLog[]>([]);
+  const { contentRef, scrollRef, scrollToBottom, isAtBottom } =
+    useStickToBottom();
 
   useEffect(() => {
     const listener = listenToServerLogs((event) => {
-      setLines((prev) => [...prev, event.payload]);
-      containerRef.current?.scrollTo({
-        top: containerRef.current.scrollHeight,
-        behavior: "smooth",
-      });
+      setLogs((prev) => [
+        ...prev,
+        {
+          id: event.payload.id,
+          timestamp: event.payload.timestamp,
+          thread: event.payload.thread,
+          message: event.payload.message,
+        },
+      ]);
     });
 
     return () => {
@@ -30,17 +41,38 @@ export function ServerLogs() {
   }, []);
 
   return (
-    <section className="my-6 flex h-full max-h-[calc(100vh-18rem)] flex-1 flex-col">
+    <div className="relative mt-6">
       {data.is_running ? (
         <>
           <div
-            ref={containerRef}
-            className="h-full space-y-4 overflow-y-auto rounded-md border p-4 font-mono text-sm *:leading-7"
+            ref={scrollRef}
+            className="h-[calc(100vh-20rem)] overflow-y-auto rounded-md border font-mono text-sm *:leading-7"
           >
-            {lines?.map((line, index) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey:
-              <p key={index}>{line}</p>
-            ))}
+            <div className="space-y-4 p-4" ref={contentRef}>
+              {logs?.map((log) => (
+                <div className="whitespace-pre-wrap break-all" key={log.id}>
+                  {log.timestamp && (
+                    <span className="text-zinc-500">[{log.timestamp}] </span>
+                  )}
+                  {log.thread && (
+                    <span className="text-zinc-400">[{log.thread}] </span>
+                  )}
+                  <span>{log.message}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="-translate-x-1/2 absolute bottom-16 left-1/2">
+            <Button
+              variant="secondary"
+              size="icon"
+              onClick={() => scrollToBottom()}
+              className={cx(
+                isAtBottom ? "pointer-events-none opacity-0" : "opacity-100"
+              )}
+            >
+              👇
+            </Button>
           </div>
           <ServerLogsCommandForm />
         </>
@@ -53,6 +85,6 @@ export function ServerLogs() {
           </Alert.Description>
         </Alert>
       )}
-    </section>
+    </div>
   );
 }
